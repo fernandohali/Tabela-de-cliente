@@ -25,6 +25,10 @@ int imprimir_todo_tebela(struct CLIENTE *Cliente, struct PRODUTO *Produto, struc
 
 int imprimir_geral(struct CLIENTE *Cliente, struct PRODUTO *Produto, int);
 
+// ___________________________Alterar tabela________________________
+
+int alterar_cliente(struct CLIENTE *Cliente, int);
+
 struct CLIENTE
 {
 	// ok
@@ -96,89 +100,84 @@ int main()
 
 	do
 	{
-		/*
-				cout << endl;
-				cout << "|-----------------------------------------------|" << endl;
-				cout << "|                TABELA CLIENTE                 |" << endl;
-				cout << "|_______________________________________________|" << endl;
-				cout << "|                                               |" << endl;
-				cout << "|A) Informacoes do cliente                      |" << endl;
-				cout << "|B) Informacoes do Pedido                       |" << endl;
-				cout << "|C) Informacoes dos produtos                    |" << endl;
-				cout << "|D) Informacoes Itens por pedido                |" << endl;
-				cout << "|E) Imprimir as informacoes                     |" << endl;
-				cout << "|F) Deleta as informacoes                       |" << endl;
-				cout << "|H) Alterar as informacoes                      |" << endl;
-				cout << "|MENU: ";
-				cin >> opcao;
 
-				if (opcao == "A", "a")
-				{
-					cout << "\n|1) Inserir as informacoes do cliente           |" << endl;
-					cout << "|2) Imprimir todos os clientes                  |" << endl;
-					cout << "|3) Deleta todos os clientes                    |" << endl;
-					cout << "|4) Alterar todos os clientes                   |" << endl;
-					cout << "|MENU: ";
-					cin >> op;
-				}
-				else if (opcao == "B", "b")
-				{
-					cout << "\n|1) Inserir pedido do cliente                   |" << endl;
-					cout << "|2) Imprimir todos os pedidos                   |" << endl;
-					cout << "|3) Deleta todos os pedidos                     |" << endl;
-					cout << "|4) Alterar todos os pedidos                    |" << endl;
-					cout << "|MENU: ";
-					cin >> op;
-				}
-				else if (opcao == "C", "c")
-				{
-					cout << "\n|1) Escolha os produtos                         |" << endl;
-					cout << "|2) Imprimir todos os produtos                  |" << endl;
-					cout << "|3) Deleta todos os produtos                    |" << endl;
-					cout << "|4) Alterar todos os produtos                   |" << endl;
-					cout << "|MENU: ";
-					cin >> op;
-				}
-				else if (opcao == "D", "e")
-				{
-					cout << "\n|1) Itens por pedido do cliente                 |" << endl;
-					cout << "|MENU: ";
-					cin >> op;
-				}
-				else if (opcao == "E", "e")
-				{
-					cout << "\n|1) Imprimir todas as informacoes               |" << endl;
-					cout << "|2) Imrprimir toda tebela do cliente selecioado |" << endl;
-					cout << "|MENU: ";
-					cin >> op;
-				}
-				else if (opcao == "F", "f")
-				{
-					cout << "\n|1) Deleta todas as informacoes                 |" << endl;
-					cout << "|2) Deleta toda tebela do cliente selecioado    |" << endl;
-					cout << "|MENU: ";
-					cin >> op;
-				}
-				else if (opcao == "H", "h")
-				{
-					cout << "\n|1) Alterar todas as informacoes               |" << endl;
-					cout << "|MENU: ";
-					cin >> op;
-				} */
+		cout << endl;
+		cout << "|-----------------------------------------------|" << endl;
+		cout << "|                TABELA CLIENTE                 |" << endl;
+		cout << "|_______________________________________________|" << endl;
+		cout << "|                                               |" << endl;
+		cout << "|A) Informacoes do cliente                      |" << endl;
+		cout << "|B) Informacoes do Pedido                       |" << endl;
+		cout << "|C) Informacoes dos produtos                    |" << endl;
+		cout << "|D) Informacoes Itens por pedido                |" << endl;
+		cout << "|E) Imprimir as informacoes                     |" << endl;
+		cout << "|F) Deleta as informacoes                       |" << endl;
+		cout << "|H) Alterar as informacoes                      |" << endl;
+		cout << "|MENU: ";
+		cin >> opcao;
 
-		cout << "\nMENU: ";
-		cin >> op;
+		if (opcao == "A", "a")
+		{
+			cout << "\n|1) Inserir as informacoes do cliente           |" << endl;
+			cout << "|2) Imprimir todos os clientes                  |" << endl;
+			cout << "|3) Deleta todos os clientes                    |" << endl;
+			cout << "|4) Alterar todos os clientes                   |" << endl;
+			cout << "|MENU: ";
+			cin >> op;
+		}
+		else if (opcao == "B", "b")
+		{
+			cout << "\n|5) Inserir pedido do cliente                   |" << endl;
+			cout << "|6) Imprimir todos os pedidos                   |" << endl;
+			cout << "|7) Deleta todos os pedidos                     |" << endl;
+			cout << "|8) Alterar todos os pedidos                    |" << endl;
+			cout << "|MENU: ";
+			cin >> op;
+		}
+		else if (opcao == "C", "c")
+		{
+			cout << "\n|9) Escolha os produtos                         |" << endl;
+			cout << "|10) Imprimir todos os produtos                  |" << endl;
+			cout << "|11) Deleta todos os produtos                    |" << endl;
+			cout << "|12) Alterar todos os produtos                   |" << endl;
+			cout << "|MENU: ";
+			cin >> op;
+		}
+		else if (opcao == "D", "e")
+		{
+			cout << "\n|13) Itens por pedido do cliente                 |" << endl;
+			cout << "|MENU: ";
+			cin >> op;
+		}
+		else if (opcao == "E", "e")
+		{
+			cout << "\n|14) Imprimir todas as informacoes               |" << endl;
+			cout << "|15) Imrprimir toda tebela do cliente selecioado |" << endl;
+			cout << "|MENU: ";
+			cin >> op;
+		}
+		else if (opcao == "F", "f")
+		{
+			cout << "\n|16) Deleta todas as informacoes                 |" << endl;
+			cout << "|17) Deleta toda tebela do cliente selecioado    |" << endl;
+			cout << "|MENU: ";
+			cin >> op;
+		}
+		else if (opcao == "H", "h")
+		{
+			cout << "\n|18) Alterar todas as informacoes do cliente              |" << endl;
+			cout << "|MENU: ";
+			cin >> op;
+		}
 
 		if (op == 1)
 		{
-
 			tamanho = i;
 			i++;
 		}
 
 		if (op == 2)
 		{
-
 			tamanho_produto = tamanho_produto_i;
 			tamanho_produto_i++;
 		}
@@ -424,4 +423,39 @@ int imprimir_geral(struct CLIENTE *Cliente, struct PRODUTO *Produto, int tamanho
 	for (int i = 0; i <= tamanho; i++)
 	{
 	}
+}
+
+int alterar_cliente(struct CLIENTE *Cliente, int quantidade)
+{
+
+	int clienteID, op;
+
+	cout << "Digite o ID do cliente." << endl;
+	cout << "Qual cliente quer alterar: ";
+	cin >> clienteID;
+
+	for (int i = 0; i <= quantidade; i++)
+	{
+		if (Cliente[i].id == clienteID)
+		{
+			cout << "1) Alterar nome do cliente" << endl;
+			cout << "2) Alterar cpf fo cliente" << endl;
+
+			if (op == 1)
+			{
+				cout << "Digite o novo nome do cliente: ";
+				cin >> Cliente[i].nome;
+				Cliente[i].nome = Cliente[i].nome;
+			}
+			if (op == 2)
+			{
+				cout << "Digite o novo cpf fo cliente: ";
+				cin >> Cliente[i].cpf;
+
+				Cliente[i].cpf = Cliente[i].cpf;
+			}
+		}
+	}
+
+	return imprimir_cliente(Cliente, quantidade);
 }

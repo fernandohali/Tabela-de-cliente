@@ -54,3 +54,7 @@ ________________________
 |     tabela cliente   |
 |ID |    NOME    | CPF |
 | 0 | fernando   | 12   |
+________________________
+|     tabela cliente   |
+|ID |    NOME    | CPF |
+| 0 | ferando   | 12   |
