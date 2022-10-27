@@ -6,6 +6,8 @@
 
 using namespace std;
 
+//______________Função Inserir_______________________
+
 int inserir_cliente(struct CLIENTE *Cliente, int); // ok
 
 int produto_cliente(struct PRODUTO *Produto, int);
@@ -25,11 +27,15 @@ int imprimir_todo_tebela(struct CLIENTE *Cliente, struct PRODUTO *Produto, struc
 
 int imprimir_geral(struct CLIENTE *Cliente, struct PRODUTO *Produto, int);
 
-// ___________________________Alterar tabela________________________
+// ___________________________Alterar tabela_____________
 
 int alterar_cliente(struct CLIENTE *Cliente, int);
 
 int alterar_produto(struct PRODUTO *Produto, int);
+
+int alterar_pedido(struct PEDIDO *Pedido, int);
+
+//____________________Função Deletar_____________________
 
 struct CLIENTE
 {
@@ -73,7 +79,7 @@ struct INTENS_POR_PEDIDO
 
 }; */
 
-//_____________PONTEIROS PARA SALVAR TEXTO____________
+//_____________ SALVAR TEXTO____________
 ofstream Cliente_txt;
 ofstream Produto_txt;
 ofstream Pedido_txt;
@@ -117,7 +123,7 @@ int main()
 		cout << "|MENU: ";
 		cin >> opcao;
 
-		if (opcao == "A")
+		if (opcao == "a")
 		{
 			cout << "\n|1) Inserir as informacoes do cliente           |" << endl;
 			cout << "|2) Imprimir todos os clientes                  |" << endl;
@@ -126,7 +132,7 @@ int main()
 			cout << "|MENU: ";
 			cin >> op;
 		}
-		else if (opcao == "B")
+		else if (opcao == "b")
 		{
 			cout << "\n|5) Inserir pedido do cliente                   |" << endl;
 			cout << "|6) Imprimir todos os pedidos                   |" << endl;
@@ -135,7 +141,7 @@ int main()
 			cout << "|MENU: ";
 			cin >> op;
 		}
-		else if (opcao == "C")
+		else if (opcao == "c")
 		{
 			cout << "\n|9) Escolha os produtos                         |" << endl;
 			cout << "|10) Imprimir todos os produtos                  |" << endl;
@@ -144,27 +150,27 @@ int main()
 			cout << "|MENU: ";
 			cin >> op;
 		}
-		else if (opcao == "D")
+		else if (opcao == "d")
 		{
 			cout << "\n|13) Itens por pedido do cliente                 |" << endl;
 			cout << "|MENU: ";
 			cin >> op;
 		}
-		else if (opcao == "E")
+		else if (opcao == "e")
 		{
 			cout << "\n|14) Imprimir todas as informacoes               |" << endl;
 			cout << "|15) Imrprimir toda tebela do cliente selecioado |" << endl;
 			cout << "|MENU: ";
 			cin >> op;
 		}
-		else if (opcao == "F")
+		else if (opcao == "f")
 		{
 			cout << "\n|16) Deleta todas as informacoes                 |" << endl;
 			cout << "|17) Deleta toda tebela do cliente selecioado    |" << endl;
 			cout << "|MENU: ";
 			cin >> op;
 		}
-		else if (opcao == "H")
+		else if (opcao == "g")
 		{
 			cout << "\n|18) Alterar todas as informacoes do cliente    |" << endl;
 			cout << "|MENU: ";
@@ -435,13 +441,13 @@ int imprimir_todo_tebela(struct CLIENTE *Cliente, struct PRODUTO *Produto, struc
 	Tabela_geral_cleinte.close();
 }
 
-/* int imprimir_geral(struct CLIENTE *Cliente, struct PRODUTO *Produto, int tamanho)
+int imprimir_geral(struct CLIENTE *Cliente, struct PRODUTO *Produto, int tamanho)
 {
 
 	for (int i = 0; i <= tamanho; i++)
 	{
 	}
-} */
+}
 
 //____________________fUNÇÃO ALTERAR__________________________
 
@@ -527,3 +533,47 @@ int alterar_produto(struct PRODUTO *Produto, int tamanho)
 
 	return imprimir_produto(Produto, tamanho);
 }
+
+int alterar_pedido(struct PEDIDO *Pedido, int tamanho)
+{
+	int pedidoID, op;
+	int *cpf;
+
+	cout << "\nDigite o ID do pedido que quer alterar:";
+	cin >> pedidoID;
+
+	do
+	{
+
+		for (int i = 0; i <= tamanho; i++)
+		{
+			if (Pedido[i].numero_pedido == pedidoID)
+			{
+				cout << "1) Alterar o numero do pedido: " << endl;
+				// cout << "2) Alterar o cpf do pedido: " << endl;
+				cout << "0) para sair" << endl;
+				cout << "MENU: ";
+				cin >> op;
+
+				if (op == 1)
+				{
+					cout << "Digite o numero do pedido: ";
+					cin >> Pedido[i].numero_pedido;
+
+					Pedido[i].numero_pedido = Pedido[i].numero_pedido;
+				}
+				/* if (op == 2)
+				{
+					cout << "Digite o cpf do pedido: ";
+					cin >> *cpf;
+
+					Pedido[i].CPF_cliente = cpf;
+				} */
+			}
+		}
+	} while (op != 0);
+
+	return imprimir_pedido(Pedido, tamanho);
+}
+
+//____________________fUNÇÃO DELETAR__________________________
