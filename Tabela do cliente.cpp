@@ -114,68 +114,110 @@ int main()
 		cout << "|                TABELA CLIENTE                 |" << endl;
 		cout << "|_______________________________________________|" << endl;
 		cout << "|                                               |" << endl;
-		cout << "|A) Informacoes do cliente                      |" << endl;
-		cout << "|B) Informacoes do Pedido                       |" << endl;
-		cout << "|C) Informacoes dos produtos                    |" << endl;
-		cout << "|D) Informacoes Itens por pedido                |" << endl;
-		cout << "|E) Imprimir as informacoes                     |" << endl;
-		cout << "|F) Deleta as informacoes                       |" << endl;
+		cout << "|A) MENU do cliente                             |" << endl;
+		cout << "|B) MENU dos produtos                           |" << endl;
+		cout << "|C) MENU do Pedido                              |" << endl;
+		cout << "|D) MENU Itens por pedido                       |" << endl;
+		cout << "|E) IMPRIMIR todas as informacoes               |" << endl;
+		cout << "|F) DELETA todas as informacoes                 |" << endl;
+		cout << "|S) Sair do menu                                |" << endl;
 		cout << "|MENU: ";
 		cin >> opcao;
 
-		if (opcao == "A")
+		do
 		{
-			cout << "\n|1) Inserir as informacoes do cliente           |" << endl;
-			cout << "|2) Imprimir todos os clientes                  |" << endl;
-			cout << "|3) Deleta todos os clientes                    |" << endl;
-			cout << "|4) Alterar todos os clientes                   |" << endl;
-			cout << "|MENU: ";
-			cin >> op;
-		}
-		else if (opcao == "B")
-		{
-			cout << "\n|5) Inserir pedido do cliente                   |" << endl;
-			cout << "|6) Imprimir todos os pedidos                   |" << endl;
-			cout << "|7) Deleta todos os pedidos                     |" << endl;
-			cout << "|8) Alterar todos os pedidos                    |" << endl;
-			cout << "|MENU: ";
-			cin >> op;
-		}
-		else if (opcao == "C")
-		{
-			cout << "\n|9) Escolha os produtos                         |" << endl;
-			cout << "|10) Imprimir todos os produtos                  |" << endl;
-			cout << "|11) Deleta todos os produtos                    |" << endl;
-			cout << "|12) Alterar todos os produtos                   |" << endl;
-			cout << "|MENU: ";
-			cin >> op;
-		}
-		else if (opcao == "D")
-		{
-			cout << "\n|13) Itens por pedido do cliente                 |" << endl;
-			cout << "|MENU: ";
-			cin >> op;
-		}
-		else if (opcao == "E")
-		{
-			cout << "\n|14) Imprimir todas as informacoes               |" << endl;
-			cout << "|15) Imrprimir toda tebela do cliente selecioado |" << endl;
-			cout << "|MENU: ";
-			cin >> op;
-		}
-		else if (opcao == "F")
-		{
-			cout << "\n|16) Deleta todas as informacoes                 |" << endl;
-			cout << "|17) Deleta toda tebela do cliente selecioado    |" << endl;
-			cout << "|MENU: ";
-			cin >> op;
-		}
-		else if (opcao == "H")
-		{
-			cout << "\n|18) Alterar todas as informacoes do cliente    |" << endl;
-			cout << "|MENU: ";
-			cin >> op;
-		}
+
+			if (opcao == "a")
+			{
+				cout << "\n|-----------------------------------------------|" << endl;
+				cout << "|                 CLIENTE                       |" << endl;
+				cout << "|_______________________________________________|" << endl;
+				cout << "|                                               |" << endl;
+				cout << "|1) Inserir as informacoes do cliente           |" << endl; // ok
+				cout << "|2) Imprimir o cliente selecionado              |" << endl;
+				cout << "|3) Imprimir todos os clientes                  |" << endl; // ok
+				cout << "|4) Deleta o cliente selecionado                |" << endl;
+				cout << "|4) Deleta todos os clientes                    |" << endl;
+				cout << "|5) Alterar o cliente selecionado               |" << endl;
+				cout << "|0) Para voltar ao MENU                         |" << endl;
+				cout << "|MENU: ";
+				cin >> op;
+			}
+			else if (opcao == "b")
+			{
+				cout << "\n|-----------------------------------------------|" << endl;
+				cout << "|                   PRODUTO                      |" << endl;
+				cout << "|________________________________________________|" << endl;
+				cout << "|                                               |" << endl;
+				cout << "|10) Inserir o produto do cliente                |" << endl;
+				cout << "|2) Imprimir o produtos selecionado              |" << endl;
+				cout << "|11) Imprimir todos os produtos                  |" << endl;
+				cout << "|12) Deleta todos os produtos                    |" << endl;
+				cout << "|13) Alterar todos os produtos                   |" << endl;
+				cout << "|0) Para voltar ao MENU                         |" << endl;
+				cout << "|MENU: ";
+				cin >> op;
+			}
+			else if (opcao == "c")
+			{
+				cout << "\n|-----------------------------------------------|" << endl;
+				cout << "|                   PEDIDO                      |" << endl;
+				cout << "|_______________________________________________|" << endl;
+				cout << "|                                               |" << endl;
+				cout << "|6) Inserir pedido do cliente                   |" << endl;
+				cout << "|2) Imprimir o pedido selecionado               |" << endl;
+				cout << "|7) Imprimir todos os pedidos                   |" << endl;
+				cout << "|8) Deleta todos os pedidos                     |" << endl;
+				cout << "|9) Alterar todos os pedidos                    |" << endl;
+				cout << "|0) Para voltar ao MENU                         |" << endl;
+				cout << "|MENU: ";
+				cin >> op;
+			}
+			else if (opcao == "d")
+			{
+				cout << "\n|-----------------------------------------------|" << endl;
+				cout << "|              INTENS POR PEDIDO                 |" << endl;
+				cout << "|________________________________________________|" << endl;
+				cout << "|                                               |" << endl;
+				cout << "|14) Itens por pedido do cliente                 |" << endl;
+				cout << "|2) Imprimir o Itens selecionado                 |" << endl;
+				cout << "|0) Para voltar ao MENU                          |" << endl;
+				cout << "|MENU: ";
+				cin >> op;
+			}
+			else if (opcao == "e")
+			{
+				cout << "\n|-----------------------------------------------|" << endl;
+				cout << "|                   IMPRIMIR                     |" << endl;
+				cout << "|________________________________________________|" << endl;
+				cout << "|15) Imprimir todas as informacoes               |" << endl;
+				cout << "|16) Imrprimir toda tebela do cliente selecioado |" << endl;
+				cout << "|0) Para voltar ao MENU                          |" << endl;
+				cout << "|MENU: ";
+				cin >> op;
+			}
+			else if (opcao == "f")
+			{
+				cout << "\n|-----------------------------------------------|" << endl;
+				cout << "|                   DELETAR                      |" << endl;
+				cout << "|________________________________________________|" << endl;
+				cout << "|17) Deleta todas as informacoes                 |" << endl;
+				cout << "|18) Deleta toda tebela do cliente selecioado    |" << endl;
+				cout << "|0) Para voltar ao MENU                          |" << endl;
+				cout << "|MENU: ";
+				cin >> op;
+			}
+			else if (opcao == "h")
+			{
+				cout << "\n|-----------------------------------------------|" << endl;
+				cout << "|                      VAZIO                     |" << endl;
+				cout << "|________________________________________________|" << endl;
+				cout << "\n|19) Alterar todas as informacoes do cliente   |" << endl;
+				cout << "|0) Para voltar ao MENU                          |" << endl;
+				cout << "|MENU: ";
+				cin >> op;
+			}
+		} while (op != 0);
 
 		if (op == 1)
 		{
@@ -201,6 +243,8 @@ int main()
 
 		switch (op)
 		{
+
+			// CLIENTES:
 		case 1:
 		{
 
@@ -209,56 +253,40 @@ int main()
 
 		break;
 
-		case 2:
-		{
-			pedido_cliente(Pedido, tamanho_pedido);
-		}
-		break;
-
-		case 9:
-		{
-			produto_cliente(Produto, tamanho_produto);
-		}
-		break;
-
-		case 4:
-		{
-			// tamanho_Intens_por_pedido é um valor contador.
-			Intens_cliente(Intens_por_pedido, tamanho_Intens_por_pedido);
-		}
-		break;
-
-		case 5:
+		case 3:
 		{
 
 			imprimir_cliente(Cliente, tamanho);
 		}
 		break;
 
+		case 5:
+		{
+			alterar_cliente(Cliente, tamanho);
+		}
+
+		break;
+
+			// PEDIDO:
+
 		case 6:
 		{
-			imprimir_pedido(Pedido, tamanho_pedido);
+			pedido_cliente(Pedido, tamanho_pedido);
 		}
 		break;
 
 		case 7:
 		{
-			cout << "\n\nVAZIO\n\n";
+			imprimir_pedido(Pedido, tamanho_pedido);
 		}
 		break;
 
-		case 8:
+			// PRODUTO:
+
+		case 10:
 		{
-			imprimir_geral(Cliente, Produto, tamanho);
+			produto_cliente(Produto, tamanho_produto);
 		}
-		break;
-
-		case 14:
-		{
-
-			imprimir_todo_tebela(Cliente, Produto, Pedido, Intens_por_pedido, tamanho);
-		}
-
 		break;
 
 		case 12:
@@ -268,9 +296,27 @@ int main()
 
 		break;
 
-		case 18:
+			// INTENS POR PEDIDO
+
+		case 14:
 		{
-			alterar_cliente(Cliente, tamanho);
+			// tamanho_Intens_por_pedido é um valor contador.
+			Intens_cliente(Intens_por_pedido, tamanho_Intens_por_pedido);
+		}
+		break;
+
+			// IMPRIMIR GERAL:
+
+		case 8:
+		{
+			imprimir_geral(Cliente, Produto, tamanho);
+		}
+		break;
+
+		case 20:
+		{
+
+			imprimir_todo_tebela(Cliente, Produto, Pedido, Intens_por_pedido, tamanho);
 		}
 
 		break;
@@ -279,7 +325,7 @@ int main()
 			break;
 		}
 
-	} while (op != 0);
+	} while (opcao != "s");
 
 	return 0;
 }
