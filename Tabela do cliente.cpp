@@ -302,6 +302,53 @@ int inserir_cliente(struct CLIENTE *Cliente, int tamanho)
 	return imprimir_cliente(Cliente, tamanho);
 }
 
+int produto_cliente(struct PRODUTO *Produto, int tamanho)
+{
+
+	cout << endl;
+	for (int i = tamanho; i <= tamanho; i++)
+	{
+		cout << "Digete o nome do produto: ";
+		cin >> Produto[i].nome;
+
+		cout << "Preco do prutodo: ";
+		cin >> Produto[i].preco;
+
+		Produto[i].numero_identificador = i;
+	}
+
+	return imprimir_produto(Produto, tamanho);
+}
+
+int pedido_cliente(struct PEDIDO *Pedido, int tamanho_pedido)
+{
+	cout << "\n";
+
+	for (int i = tamanho_pedido; i <= tamanho_pedido; i++)
+	{
+		// cout << "Digite o numero do pedido: ";
+		Pedido[i].numero_pedido = i;
+	}
+
+	return imprimir_pedido(Pedido, tamanho_pedido);
+}
+
+int Intens_cliente(struct INTENS_POR_PEDIDO *Intens_por_pedido, int tamanho_Intens_por_pedido)
+{
+
+	int quantidade;
+
+	cout << "\nQuantos itens voce deseja: ";
+	cin >> quantidade;
+
+	for (int i = 0; i < quantidade; i++)
+	{
+		/* code */
+	}
+}
+
+//____________________fUNÇÃO iMPRIMIR__________________________
+
 int imprimir_cliente(struct CLIENTE *Cliente, int tamanho)
 {
 	Cliente_txt.open("Cliente.txt", ios::app); // não subistiuir o valor anterio. (ios::app)
@@ -321,24 +368,6 @@ int imprimir_cliente(struct CLIENTE *Cliente, int tamanho)
 	}
 
 	Cliente_txt.close();
-}
-
-int produto_cliente(struct PRODUTO *Produto, int tamanho)
-{
-
-	cout << endl;
-	for (int i = tamanho; i <= tamanho; i++)
-	{
-		cout << "Digete o nome do produto: ";
-		cin >> Produto[i].nome;
-
-		cout << "Preco do prutodo: ";
-		cin >> Produto[i].preco;
-
-		Produto[i].numero_identificador = i;
-	}
-
-	return imprimir_produto(Produto, tamanho);
 }
 
 int imprimir_produto(struct PRODUTO *Produto, int tamanho)
@@ -362,19 +391,6 @@ int imprimir_produto(struct PRODUTO *Produto, int tamanho)
 	Produto_txt.close();
 }
 
-int pedido_cliente(struct PEDIDO *Pedido, int tamanho_pedido)
-{
-	cout << "\n";
-
-	for (int i = tamanho_pedido; i <= tamanho_pedido; i++)
-	{
-		// cout << "Digite o numero do pedido: ";
-		Pedido[i].numero_pedido = i;
-	}
-
-	return imprimir_pedido(Pedido, tamanho_pedido);
-}
-
 int imprimir_pedido(struct PEDIDO *Pedido, int tamanho_pedido)
 {
 	Pedido_txt.open("Pedido.txt", ios::app);
@@ -393,19 +409,6 @@ int imprimir_pedido(struct PEDIDO *Pedido, int tamanho_pedido)
 	}
 
 	Pedido_txt.close();
-}
-int Intens_cliente(struct INTENS_POR_PEDIDO *Intens_por_pedido, int tamanho_Intens_por_pedido)
-{
-
-	int quantidade;
-
-	cout << "\nQuantos itens voce deseja: ";
-	cin >> quantidade;
-
-	for (int i = 0; i < quantidade; i++)
-	{
-		/* code */
-	}
 }
 
 int imprimir_todo_tebela(struct CLIENTE *Cliente, struct PRODUTO *Produto, struct PEDIDO *Pedido, struct INTENS_POR_PEDIDO *Intens_por_pedido, int tamanho)
@@ -432,13 +435,15 @@ int imprimir_todo_tebela(struct CLIENTE *Cliente, struct PRODUTO *Produto, struc
 	Tabela_geral_cleinte.close();
 }
 
-int imprimir_geral(struct CLIENTE *Cliente, struct PRODUTO *Produto, int tamanho)
+/* int imprimir_geral(struct CLIENTE *Cliente, struct PRODUTO *Produto, int tamanho)
 {
 
 	for (int i = 0; i <= tamanho; i++)
 	{
 	}
-}
+} */
+
+//____________________fUNÇÃO ALTERAR__________________________
 
 int alterar_cliente(struct CLIENTE *Cliente, int tamanho)
 {
@@ -485,7 +490,7 @@ int alterar_cliente(struct CLIENTE *Cliente, int tamanho)
 int alterar_produto(struct PRODUTO *Produto, int tamanho)
 {
 	int produtoID, op;
-	
+
 	cout << "\nDigite o ID do produto que quer alterar:";
 	cin >> produtoID;
 
