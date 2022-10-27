@@ -123,7 +123,7 @@ int main()
 		cout << "|MENU: ";
 		cin >> opcao;
 
-		if (opcao == "a")
+		if (opcao == "A")
 		{
 			cout << "\n|1) Inserir as informacoes do cliente           |" << endl;
 			cout << "|2) Imprimir todos os clientes                  |" << endl;
@@ -132,7 +132,7 @@ int main()
 			cout << "|MENU: ";
 			cin >> op;
 		}
-		else if (opcao == "b")
+		else if (opcao == "B")
 		{
 			cout << "\n|5) Inserir pedido do cliente                   |" << endl;
 			cout << "|6) Imprimir todos os pedidos                   |" << endl;
@@ -141,7 +141,7 @@ int main()
 			cout << "|MENU: ";
 			cin >> op;
 		}
-		else if (opcao == "c")
+		else if (opcao == "C")
 		{
 			cout << "\n|9) Escolha os produtos                         |" << endl;
 			cout << "|10) Imprimir todos os produtos                  |" << endl;
@@ -150,27 +150,27 @@ int main()
 			cout << "|MENU: ";
 			cin >> op;
 		}
-		else if (opcao == "d")
+		else if (opcao == "D")
 		{
 			cout << "\n|13) Itens por pedido do cliente                 |" << endl;
 			cout << "|MENU: ";
 			cin >> op;
 		}
-		else if (opcao == "e")
+		else if (opcao == "E")
 		{
 			cout << "\n|14) Imprimir todas as informacoes               |" << endl;
 			cout << "|15) Imrprimir toda tebela do cliente selecioado |" << endl;
 			cout << "|MENU: ";
 			cin >> op;
 		}
-		else if (opcao == "f")
+		else if (opcao == "F")
 		{
 			cout << "\n|16) Deleta todas as informacoes                 |" << endl;
 			cout << "|17) Deleta toda tebela do cliente selecioado    |" << endl;
 			cout << "|MENU: ";
 			cin >> op;
 		}
-		else if (opcao == "g")
+		else if (opcao == "H")
 		{
 			cout << "\n|18) Alterar todas as informacoes do cliente    |" << endl;
 			cout << "|MENU: ";
