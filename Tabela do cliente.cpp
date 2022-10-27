@@ -29,6 +29,8 @@ int imprimir_geral(struct CLIENTE *Cliente, struct PRODUTO *Produto, int);
 
 int alterar_cliente(struct CLIENTE *Cliente, int);
 
+int alterar_produto(struct PRODUTO *Produto, int);
+
 struct CLIENTE
 {
 	// ok
@@ -112,7 +114,6 @@ int main()
 		cout << "|D) Informacoes Itens por pedido                |" << endl;
 		cout << "|E) Imprimir as informacoes                     |" << endl;
 		cout << "|F) Deleta as informacoes                       |" << endl;
-		cout << "|H) Alterar as informacoes                      |" << endl;
 		cout << "|MENU: ";
 		cin >> opcao;
 
@@ -208,7 +209,7 @@ int main()
 		}
 		break;
 
-		case 3:
+		case 9:
 		{
 			produto_cliente(Produto, tamanho_produto);
 		}
@@ -246,10 +247,17 @@ int main()
 		}
 		break;
 
-		case 9:
+		case 14:
 		{
 
 			imprimir_todo_tebela(Cliente, Produto, Pedido, Intens_por_pedido, tamanho);
+		}
+
+		break;
+
+		case 12:
+		{
+			alterar_produto(Produto, tamanho_produto);
 		}
 
 		break;
@@ -432,39 +440,85 @@ int imprimir_geral(struct CLIENTE *Cliente, struct PRODUTO *Produto, int tamanho
 	}
 }
 
-int alterar_cliente(struct CLIENTE *Cliente, int quantidade)
+int alterar_cliente(struct CLIENTE *Cliente, int tamanho)
 {
 
 	int clienteID, op;
 
-	cout << "Digite o ID do cliente." << endl;
-	cout << "Qual cliente quer alterar: ";
+	cout << "\bDigite o ID do cliente que quer alterar: " << endl;
+	cout << "MENU: ";
 	cin >> clienteID;
 
-	for (int i = 0; i <= quantidade; i++)
+	do
 	{
-		if (Cliente[i].id == clienteID)
+
+		for (int i = 0; i <= tamanho; i++)
 		{
-			cout << "1) Alterar nome do cliente" << endl;
-			cout << "2) Alterar cpf fo cliente" << endl;
-			cout << "MENU: ";
-			cin >> op;
-
-			if (op == 1)
+			if (Cliente[i].id == clienteID)
 			{
-				cout << "Digite o novo nome do cliente: ";
-				cin >> Cliente[i].nome;
-				Cliente[i].nome = Cliente[i].nome;
-			}
-			if (op == 2)
-			{
-				cout << "Digite o novo cpf fo cliente: ";
-				cin >> Cliente[i].cpf;
+				cout << "\n1) Alterar nome do cliente" << endl;
+				cout << "2) Alterar cpf fo cliente" << endl;
+				cout << "0) para sair" << endl;
+				cout << "MENU: ";
+				cin >> op;
 
-				Cliente[i].cpf = Cliente[i].cpf;
+				if (op == 1)
+				{
+					cout << "Digite o novo nome do cliente: ";
+					cin >> Cliente[i].nome;
+					Cliente[i].nome = Cliente[i].nome;
+				}
+				if (op == 2)
+				{
+					cout << "Digite o novo cpf fo cliente: ";
+					cin >> Cliente[i].cpf;
+
+					Cliente[i].cpf = Cliente[i].cpf;
+				}
 			}
 		}
-	}
+	} while (op != 0);
 
-	return imprimir_cliente(Cliente, quantidade);
+	return imprimir_cliente(Cliente, tamanho);
+}
+
+int alterar_produto(struct PRODUTO *Produto, int tamanho)
+{
+	int produtoID, op;
+	
+	cout << "\nDigite o ID do produto que quer alterar:";
+	cin >> produtoID;
+
+	do
+	{
+
+		for (int i = 0; i <= tamanho; i++)
+		{
+			if (Produto[i].numero_identificador == produtoID)
+			{
+				cout << "1) Alterar o nome do produto: " << endl;
+				cout << "2) Alterar o preco do produto: " << endl;
+				cout << "0) para sair" << endl;
+				cout << "MENU: ";
+				cin >> op;
+
+				if (op == 1)
+				{
+					cout << "Digite o novo nome do produto: ";
+					cin >> Produto[i].nome;
+
+					Produto[i].nome = Produto[i].nome;
+				}
+				if (op == 2)
+				{
+					cout << "Digite o novo preco do produto: ";
+					cin >> Produto[i].preco;
+
+					Produto[i].preco = Produto[i].preco;
+				}
+			}
+		}
+	} while (op != 0);
+
+	return imprimir_produto(Produto, tamanho);
 }
