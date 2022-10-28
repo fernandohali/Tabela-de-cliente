@@ -14,7 +14,7 @@ int produto_cliente(struct PRODUTO *Produto, int);
 
 int pedido_cliente(struct PEDIDO *Pedido, int);
 
-int Intens_cliente(struct INTENS_POR_PEDIDO *Intens_por_pedido, int);
+// int Intens_cliente(struct INTENS_POR_PEDIDO *Intens_por_pedido, int);
 
 //_______________Função Imprimir____________________
 int imprimir_cliente(struct CLIENTE *Cliente, int);
@@ -22,6 +22,8 @@ int imprimir_cliente(struct CLIENTE *Cliente, int);
 int imprimir_produto(struct PRODUTO *Produto, int);
 
 int imprimir_pedido(struct PEDIDO *Pedido, int);
+
+// int imprimir_itens(struct INTENS_POR_PEDIDO *Intens_por_pedido, int);
 
 int imprimir_todo_tebela(struct CLIENTE *Cliente, struct PRODUTO *Produto, struct PEDIDO *Pedido, struct INTENS_POR_PEDIDO *Intens_por_pedido, int);
 
@@ -277,7 +279,7 @@ int main()
 			// {
 			// 	pedido_cliente(Pedido, tamanho_pedido);
 			// }
-			break;
+			// break;
 
 		case 15:
 		{
@@ -303,11 +305,11 @@ int main()
 			// INTENS POR PEDIDO
 
 			/* case 14:
-			{
-				// tamanho_Intens_por_pedido é um valor contador.
-				Intens_cliente(Intens_por_pedido, tamanho_Intens_por_pedido);
-			} */
-			break;
+		   {
+			   // tamanho_Intens_por_pedido é um valor contador.
+			   Intens_cliente(Intens_por_pedido, tamanho_Intens_por_pedido);
+		   }
+		   break; */
 
 			// IMPRIMIR GERAL:
 
@@ -340,7 +342,6 @@ int inserir_cliente(struct CLIENTE *Cliente, int tamanho)
 	int i = 0;
 
 	PEDIDO Pedido[100];
-	INTENS_POR_PEDIDO Intens_por_pedido[100];
 
 	for (int i = tamanho; i <= tamanho; i++)
 	{
@@ -350,8 +351,6 @@ int inserir_cliente(struct CLIENTE *Cliente, int tamanho)
 
 		cout << "Digite o CPf do cliente: ";
 		cin >> Cliente[i].cpf;
-
-		Pedido[i].numero_pedido = i;
 
 		Cliente[i].id = i;
 
@@ -393,20 +392,18 @@ int pedido_cliente(struct PEDIDO *Pedido, int tamanho_pedido)
 	return imprimir_pedido(Pedido, tamanho_pedido);
 }
 
-int Intens_cliente(struct INTENS_POR_PEDIDO *Intens_por_pedido, int tamanho_Intens_por_pedido)
+/* int Intens_cliente(struct INTENS_POR_PEDIDO *Intens_por_pedido, int tamanho_Intens_por_pedido)
 {
-	/* int quantidade_pedido;
+	int quantidade_pedido;
 
 	cout << "\nO cliente quer ter quantos pedidos: ";
 	cin >> quantidade_pedido;
 
-	return Intens_cliente(Intens_por_pedido, quantidade_pedido); */
-
-	for (int i = 0; i < tamanho_Intens_por_pedido; i++)
+	for (int i = tamanho_Intens_por_pedido; i < quantidade_pedido; i++)
 	{
-		/* code */
+
 	}
-}
+} */
 
 //____________________fUNÇÃO iMPRIMIR__________________________
 
