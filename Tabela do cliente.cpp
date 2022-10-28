@@ -250,30 +250,74 @@ int main()
 		switch (op)
 		{
 
-			// CLIENTES:
+			//  "|-----------------------------------------------|" << endl;
+			//  "|                 CLIENTE                       |" << endl;
+			//  "|_______________________________________________|" << endl;
+
 		case 1:
 		{
 
-			inserir_cliente(Cliente, tamanho);
+			inserir_cliente(Cliente, tamanho); // OK
 		}
 
 		break;
+		case 2:
+		{
+			// imprimir_selecionado_cliente(Cliente);
+		}
 
+		break;
 		case 3:
 		{
-
 			imprimir_cliente(Cliente, tamanho);
 		}
+
+		break;
+		case 4:
+		{
+			// deletar_selecionado_cliente(Cliente, tamanho);
+		}
+
 		break;
 
 		case 5:
+		{
+
+			// deletar_todos_cliente(Cleinte);
+		}
+		break;
+
+		case 6:
 		{
 			alterar_cliente(Cliente, tamanho);
 		}
 
 		break;
 
-			//_______________________PEDIDO________________________________
+			//----------------------------------------------------------------
+
+			//  "|------------------------------------------------|" << endl;
+			//  "|                   PRODUTO                      |" << endl;
+			//  "|________________________________________________|" << endl;
+
+		case 7:
+		{
+			produto_cliente(Produto, tamanho_produto);
+		}
+		break;
+
+		case 12:
+		{
+			alterar_produto(Produto, tamanho_produto);
+		}
+
+		break;
+
+			//----------------------------------------------------------------
+
+			//  "|-----------------------------------------------|" << endl;
+			//  "|                   PEDIDO                      |" << endl;
+			//  "|_______________________________________________|" << endl;
 
 			// case 6:
 			// {
@@ -287,39 +331,7 @@ int main()
 		}
 		break;
 
-			//________________________PRODUTO______________________________
-
-		case 10:
-		{
-			produto_cliente(Produto, tamanho_produto);
-		}
-		break;
-
-		case 12:
-		{
-			alterar_produto(Produto, tamanho_produto);
-		}
-
-		break;
-
-			// INTENS POR PEDIDO
-
-			/* case 14:
-		   {
-			   // tamanho_Intens_por_pedido é um valor contador.
-			   Intens_cliente(Intens_por_pedido, tamanho_Intens_por_pedido);
-		   }
-		   break; */
-
-			// IMPRIMIR GERAL:
-
-		case 8:
-		{
-			imprimir_geral(Cliente, Produto, tamanho);
-		}
-		break;
-
-		case 20:
+		case 25:
 		{
 
 			imprimir_todo_tebela(Cliente, Produto, Pedido, Intens_por_pedido, tamanho);
@@ -493,14 +505,6 @@ int imprimir_todo_tebela(struct CLIENTE *Cliente, struct PRODUTO *Produto, struc
 	Tabela_geral_cleinte.close();
 }
 
-/* int imprimir_geral(struct CLIENTE *Cliente, struct PRODUTO *Produto, int tamanho)
-{
-
-	for (int i = 0; i <= tamanho; i++)
-	{
-	}
-} */
-
 //____________________fUNÇÃO ALTERAR__________________________
 
 int alterar_cliente(struct CLIENTE *Cliente, int tamanho)
@@ -589,7 +593,7 @@ int alterar_produto(struct PRODUTO *Produto, int tamanho)
 int alterar_pedido(struct PEDIDO *Pedido, int tamanho)
 {
 	int pedidoID, op;
-	int *cpf;
+	// int *cpf;
 
 	cout << "\nDigite o ID do pedido que quer alterar:";
 	cin >> pedidoID;
