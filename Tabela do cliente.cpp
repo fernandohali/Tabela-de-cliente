@@ -493,13 +493,13 @@ int imprimir_todo_tebela(struct CLIENTE *Cliente, struct PRODUTO *Produto, struc
 	Tabela_geral_cleinte.close();
 }
 
-int imprimir_geral(struct CLIENTE *Cliente, struct PRODUTO *Produto, int tamanho)
+/* int imprimir_geral(struct CLIENTE *Cliente, struct PRODUTO *Produto, int tamanho)
 {
 
 	for (int i = 0; i <= tamanho; i++)
 	{
 	}
-}
+} */
 
 //____________________fUNÇÃO ALTERAR__________________________
 
