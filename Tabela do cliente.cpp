@@ -18,6 +18,7 @@ int pedido_cliente(struct PEDIDO *Pedido, int);
 
 //_______________Função Imprimir____________________
 int imprimir_cliente(struct CLIENTE *Cliente, int);
+int imprimir_selecionado_cliente(struct CLIENTE *Cliente, int tamanho);
 
 int imprimir_produto(struct PRODUTO *Produto, int);
 
@@ -48,14 +49,6 @@ struct CLIENTE
 
 } Cliente;
 
-struct PEDIDO
-{
-	int numero_pedido;
-
-	int *CPF_cliente = &Cliente.cpf; // ok
-
-} Pedido;
-
 struct PRODUTO
 {
 	int numero_identificador;
@@ -63,6 +56,14 @@ struct PRODUTO
 	float preco;
 
 } Produto;
+
+struct PEDIDO
+{
+	int numero_pedido;
+
+	int *CPF_cliente = &Cliente.cpf; // ok
+
+} Pedido;
 
 struct INTENS_POR_PEDIDO
 {
@@ -74,12 +75,6 @@ struct INTENS_POR_PEDIDO
 	// Precisa de um contador para a quaidade de procutos comprados.
 
 } Intens_por_pedido;
-
-/* struct No_lista
-{
-	CLIENTE Lista_cliente;
-
-}; */
 
 //_____________ SALVAR TEXTO____________
 ofstream Cliente_txt;
@@ -132,13 +127,13 @@ int main()
 			cout << "|                 CLIENTE                       |" << endl;
 			cout << "|_______________________________________________|" << endl;
 			cout << "|                                               |" << endl;
-			cout << "|1) Inserir as informacoes do cliente           |" << endl; // ok
-			cout << "|2) Imprimir o cliente selecionado              |" << endl;
-			cout << "|3) Imprimir todos os clientes                  |" << endl; // ok
-			cout << "|4) Deletar o cliente selecionado               |" << endl;
-			cout << "|5) Deletar todos os clientes                   |" << endl;
+			cout << "|1) Inserir as informacoes do cliente           |" << endl; // OK
+			cout << "|2) Imprimir o cliente selecionado              |" << endl; // OK
+			cout << "|3) Imprimir todos os clientes                  |" << endl; // OK
+			cout << "|4) Deletar o cliente selecionado               |" << endl; // FAZER AINDA 
+			cout << "|5) Deletar todos os clientes                   |" << endl; // FAZER AINDA 
 			cout << "|6) Alterar o cliente selecionado               |" << endl;
-			cout << "|0) Para voltar ao MENU                         |" << endl;
+			cout << "|0) Para voltar ao MENU                         |" << endl; // OK
 			cout << "|MENU: ";
 			cin >> op;
 		}
@@ -164,7 +159,7 @@ int main()
 			cout << "|                   PEDIDO                      |" << endl;
 			cout << "|_______________________________________________|" << endl;
 			cout << "|                                               |" << endl;
-			cout << "|13) deletar esse cout                          |" << endl;
+			cout << "|13) Criar o pedido do cliente                  |" << endl;
 			cout << "|14) Imprimir o pedido selecionado              |" << endl;
 			cout << "|15) Imprimir todos os pedidos                  |" << endl;
 			cout << "|16) Deletar o pedido selecioando               |" << endl;
@@ -263,7 +258,7 @@ int main()
 		break;
 		case 2:
 		{
-			// imprimir_selecionado_cliente(Cliente);
+			imprimir_selecionado_cliente(Cliente, tamanho);
 		}
 
 		break;
@@ -276,6 +271,8 @@ int main()
 		case 4:
 		{
 			// deletar_selecionado_cliente(Cliente, tamanho);
+			
+			// deletar_selecionado_cliente(struct CLIENTE Cliente, int tamanho);
 		}
 
 		break;
@@ -351,7 +348,6 @@ int main()
 // ok
 int inserir_cliente(struct CLIENTE *Cliente, int tamanho)
 {
-	int i = 0;
 
 	PEDIDO Pedido[100];
 
@@ -396,26 +392,13 @@ int pedido_cliente(struct PEDIDO *Pedido, int tamanho_pedido)
 
 	for (int i = 0; i < Pedido[i].numero_pedido; i++)
 	{
-		// cout << "Digite o numero do pedido: ";
+
 		Pedido[i].numero_pedido = i;
 		tamanho_pedido = i;
 	}
 
 	return imprimir_pedido(Pedido, tamanho_pedido);
 }
-
-/* int Intens_cliente(struct INTENS_POR_PEDIDO *Intens_por_pedido, int tamanho_Intens_por_pedido)
-{
-	int quantidade_pedido;
-
-	cout << "\nO cliente quer ter quantos pedidos: ";
-	cin >> quantidade_pedido;
-
-	for (int i = tamanho_Intens_por_pedido; i < quantidade_pedido; i++)
-	{
-
-	}
-} */
 
 //____________________fUNÇÃO iMPRIMIR__________________________
 
@@ -438,6 +421,25 @@ int imprimir_cliente(struct CLIENTE *Cliente, int tamanho)
 	}
 
 	Cliente_txt.close();
+}
+
+int imprimir_selecionado_cliente(struct CLIENTE *Cliente, int tamanho)
+{
+	int escolha;
+	cout << "Digite o ID do cleinte\n";
+	cout << "Qual cliente quer imprimir: ";
+	cin >> escolha;
+
+	for (int i = 0; i <= tamanho; i++)
+	{
+		if (escolha = Cliente[i].id)
+		{
+			cout << "________________________" << endl;
+			cout << "|     tabela cliente   |" << endl;
+			cout << "|ID |    NOME    | CPF |" << endl;
+			cout << "| " << Cliente[i].id << " | " << Cliente[i].nome << "   | " << Cliente[i].cpf << "   |" << endl;
+		}
+	}
 }
 
 int imprimir_produto(struct PRODUTO *Produto, int tamanho)
