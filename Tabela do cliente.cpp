@@ -3,6 +3,7 @@
 #include <locale.h>
 #include <conio.h>
 #include <fstream>
+#include <string.h>
 
 using namespace std;
 
@@ -18,11 +19,16 @@ int pedido_cliente(struct PEDIDO *Pedido, int);
 
 //_______________Função Imprimir____________________
 int imprimir_cliente(struct CLIENTE *Cliente, int);
+
 int imprimir_selecionado_cliente(struct CLIENTE *Cliente, int tamanho);
 
 int imprimir_produto(struct PRODUTO *Produto, int);
 
+int imprimir_selecionado_produto(struct PRODUTO *Produto, int);
+
 int imprimir_pedido(struct PEDIDO *Pedido, int);
+
+int imprimir_selecionaod_pedido(struct PEDIDO *Pedido, int);
 
 // int imprimir_itens(struct INTENS_POR_PEDIDO *Intens_por_pedido, int);
 
@@ -40,11 +46,15 @@ int alterar_pedido(struct PEDIDO *Pedido, int);
 
 //____________________Função Deletar_____________________
 
+int deletar_selecionado_cliente(struct CLIENTE *Cliente, int);
+
+//________________________________________________________
+
 struct CLIENTE
 {
 	// ok
 	string nome; // ok
-	int cpf;	 // ok
+	string cpf;	 // ok
 	int id;
 
 } Cliente;
@@ -61,7 +71,7 @@ struct PEDIDO
 {
 	int numero_pedido;
 
-	int *CPF_cliente = &Cliente.cpf; // ok
+	string *CPF_cliente = &Cliente.cpf; // ok
 
 } Pedido;
 
@@ -130,9 +140,9 @@ int main()
 			cout << "|1) Inserir as informacoes do cliente           |" << endl; // OK
 			cout << "|2) Imprimir o cliente selecionado              |" << endl; // OK
 			cout << "|3) Imprimir todos os clientes                  |" << endl; // OK
-			cout << "|4) Deletar o cliente selecionado               |" << endl; // FAZER AINDA 
-			cout << "|5) Deletar todos os clientes                   |" << endl; // FAZER AINDA 
-			cout << "|6) Alterar o cliente selecionado               |" << endl;
+			cout << "|4) Deletar o cliente selecionado               |" << endl; // OK
+			cout << "|5) Deletar todos os clientes                   |" << endl; // FAZER AINDA
+			cout << "|6) Alterar o cliente selecionado               |" << endl; // OK
 			cout << "|0) Para voltar ao MENU                         |" << endl; // OK
 			cout << "|MENU: ";
 			cin >> op;
@@ -143,12 +153,12 @@ int main()
 			cout << "|                   PRODUTO                      |" << endl;
 			cout << "|________________________________________________|" << endl;
 			cout << "|                                                |" << endl;
-			cout << "|7) Inserir as informacoes do produto            |" << endl;
-			cout << "|8) Imprimir o produtos selecionado              |" << endl;
-			cout << "|9) Imprimir todos os produtos                   |" << endl;
-			cout << "|10) Deletar o produtos selecionado              |" << endl;
-			cout << "|11) Deletar todos os produtos                   |" << endl;
-			cout << "|12) Alterar o pruduto selecionado               |" << endl;
+			cout << "|7) Inserir as informacoes do produto            |" << endl; // OK
+			cout << "|8) Imprimir o produtos selecionado              |" << endl; // OK
+			cout << "|9) Imprimir todos os produtos                   |" << endl; // OK
+			cout << "|10) Deletar o produtos selecionado              |" << endl; // FAZER AINDA
+			cout << "|11) Deletar todos os produtos                   |" << endl; // FAZER AINDA
+			cout << "|12) Alterar o pruduto selecionado               |" << endl; // OK
 			cout << "|0) Para voltar ao MENU                          |" << endl;
 			cout << "|MENU: ";
 			cin >> op;
@@ -159,12 +169,12 @@ int main()
 			cout << "|                   PEDIDO                      |" << endl;
 			cout << "|_______________________________________________|" << endl;
 			cout << "|                                               |" << endl;
-			cout << "|13) Criar o pedido do cliente                  |" << endl;
-			cout << "|14) Imprimir o pedido selecionado              |" << endl;
-			cout << "|15) Imprimir todos os pedidos                  |" << endl;
-			cout << "|16) Deletar o pedido selecioando               |" << endl;
-			cout << "|17) Deletar todos os pedidos                   |" << endl;
-			cout << "|18) Alterar o pedido selecionado               |" << endl;
+			cout << "|13) Criar o pedido do cliente                  |" << endl; // OK
+			cout << "|14) Imprimir o pedido selecionado              |" << endl; // OK
+			cout << "|15) Imprimir todos os pedidos                  |" << endl; // OK
+			cout << "|16) Deletar o pedido selecioando               |" << endl; // FAZER AINDA
+			cout << "|17) Deletar todos os pedidos                   |" << endl; // FAZER AINDA
+			cout << "|18) Alterar o pedido selecionado               |" << endl; // OK
 			cout << "|0) Voltar ao MENU                              |" << endl;
 			cout << "|MENU: ";
 			cin >> op;
@@ -175,12 +185,13 @@ int main()
 			cout << "|              INTENS POR PEDIDO                 |" << endl;
 			cout << "|________________________________________________|" << endl;
 			cout << "|                                                |" << endl;
-			cout << "|19) Inserir intens por cliente                  |" << endl;
-			cout << "|20) Imprimir os intens selecionado              |" << endl;
-			cout << "|21) Imprimir todos os intens por pedido         |" << endl;
-			cout << "|22) Deletar os intens selecionado               |" << endl;
-			cout << "|23) Deletar todos os intens                     |" << endl;
-			cout << "|24) Alterar os intens selecionado               |" << endl;
+			cout << "|19) Inserir intens por cliente                  |" << endl; // FAZER AINDA
+			cout << "|20) Imprimir os intens selecionado              |" << endl; // FAZER AINDA
+			cout << "|21) Imprimir todos os intens por pedido         |" << endl; // FAZER AINDA
+			cout << "|22) Deletar os intens selecionado               |" << endl; // FAZER AINDA
+			cout << "|23) Deletar todos os intens                     |" << endl; // FAZER AINDA
+			cout << "|24) Alterar os intens selecionado               |" << endl; // FAZER AINDA
+			cout << "|0) Voltar ao MENU                               |" << endl;
 			cout << "|MENU: ";
 			cin >> op;
 		}
@@ -231,7 +242,7 @@ int main()
 			tamanho_produto = tamanho_produto_i;
 			tamanho_produto_i++;
 		}
-		if (op == 15)
+		if (op == 13)
 		{
 			tamanho_pedido = tamanho_pedido_i;
 			tamanho_pedido_i++;
@@ -254,33 +265,31 @@ int main()
 
 			inserir_cliente(Cliente, tamanho); // OK
 		}
-
 		break;
+
 		case 2:
 		{
 			imprimir_selecionado_cliente(Cliente, tamanho);
 		}
-
 		break;
+
 		case 3:
 		{
 			imprimir_cliente(Cliente, tamanho);
 		}
-
 		break;
+
 		case 4:
 		{
-			// deletar_selecionado_cliente(Cliente, tamanho);
-			
-			// deletar_selecionado_cliente(struct CLIENTE Cliente, int tamanho);
+			deletar_selecionado_cliente(Cliente, tamanho);
 		}
-
 		break;
 
 		case 5:
 		{
 
-			// deletar_todos_cliente(Cleinte);
+			// deletar_todos_cliente(Cleinte, tamanho);
+			// deletar_todos_cliente(struct CLIENTE Cliente, int tamanho);
 		}
 		break;
 
@@ -288,7 +297,6 @@ int main()
 		{
 			alterar_cliente(Cliente, tamanho);
 		}
-
 		break;
 
 			//----------------------------------------------------------------
@@ -303,11 +311,16 @@ int main()
 		}
 		break;
 
+		case 8:
+		{
+			imprimir_selecionado_produto(Produto, tamanho_produto);
+		}
+		break;
+
 		case 12:
 		{
 			alterar_produto(Produto, tamanho_produto);
 		}
-
 		break;
 
 			//----------------------------------------------------------------
@@ -316,11 +329,17 @@ int main()
 			//  "|                   PEDIDO                      |" << endl;
 			//  "|_______________________________________________|" << endl;
 
-			// case 6:
-			// {
-			// 	pedido_cliente(Pedido, tamanho_pedido);
-			// }
-			// break;
+		case 13:
+		{
+			pedido_cliente(Pedido, tamanho_pedido);
+		}
+		break;
+
+		case 14:
+		{
+			imprimir_selecionaod_pedido(Pedido, tamanho_pedido);
+		}
+		break;
 
 		case 15:
 		{
@@ -390,17 +409,17 @@ int pedido_cliente(struct PEDIDO *Pedido, int tamanho_pedido)
 {
 	cout << "\n";
 
-	for (int i = 0; i < Pedido[i].numero_pedido; i++)
+	for (int i = 0; i <= tamanho_pedido; i++)
 	{
 
 		Pedido[i].numero_pedido = i;
-		tamanho_pedido = i;
+		// tamanho_pedido = i;
 	}
 
 	return imprimir_pedido(Pedido, tamanho_pedido);
 }
 
-//____________________fUNÇÃO iMPRIMIR__________________________
+//____________________fUNÇÃO IMPRIMIR__________________________
 
 int imprimir_cliente(struct CLIENTE *Cliente, int tamanho)
 {
@@ -410,12 +429,12 @@ int imprimir_cliente(struct CLIENTE *Cliente, int tamanho)
 	for (int i = 0; i <= tamanho; i++)
 	{
 		cout << "________________________" << endl;
-		cout << "|     tabela cliente   |" << endl;
+		cout << "|     Tabela Cliente   |" << endl;
 		cout << "|ID |    NOME    | CPF |" << endl;
 		cout << "| " << Cliente[i].id << " | " << Cliente[i].nome << "   | " << Cliente[i].cpf << "   |" << endl;
 
 		Cliente_txt << "________________________" << endl;
-		Cliente_txt << "|     tabela cliente   |" << endl;
+		Cliente_txt << "|     Tabela Cliente   |" << endl;
 		Cliente_txt << "|ID |    NOME    | CPF |" << endl;
 		Cliente_txt << "| " << Cliente[i].id << " | " << Cliente[i].nome << "   | " << Cliente[i].cpf << "   |" << endl;
 	}
@@ -435,7 +454,7 @@ int imprimir_selecionado_cliente(struct CLIENTE *Cliente, int tamanho)
 		if (escolha = Cliente[i].id)
 		{
 			cout << "________________________" << endl;
-			cout << "|     tabela cliente   |" << endl;
+			cout << "|     Tabela Cliente   |" << endl;
 			cout << "|ID |    NOME    | CPF |" << endl;
 			cout << "| " << Cliente[i].id << " | " << Cliente[i].nome << "   | " << Cliente[i].cpf << "   |" << endl;
 		}
@@ -450,12 +469,12 @@ int imprimir_produto(struct PRODUTO *Produto, int tamanho)
 	{
 
 		cout << "__________________________" << endl;
-		cout << "|     tabela Protudo     |" << endl;
+		cout << "|     Tabela Protudo     |" << endl;
 		cout << "|ID |    NOME    | preco |" << endl;
 		cout << "| " << Produto[i].numero_identificador << " | " << Produto[i].nome << "   | " << Produto[i].preco << "   |" << endl;
 
 		Produto_txt << "__________________________" << endl;
-		Produto_txt << "|     tabela protudo     |" << endl;
+		Produto_txt << "|     Tabela Protudo     |" << endl;
 		Produto_txt << "|ID |    NOME    | preco |" << endl;
 		Produto_txt << "| " << Produto[i].numero_identificador << " | " << Produto[i].nome << "   | " << Produto[i].preco << "   |" << endl;
 	}
@@ -463,24 +482,63 @@ int imprimir_produto(struct PRODUTO *Produto, int tamanho)
 	Produto_txt.close();
 }
 
+int imprimir_selecionado_produto(struct PRODUTO *Produto, int tamanho)
+{
+
+	int escolha;
+	cout << "Digite o ID do produto:\n";
+	cout << "Qual produto quer imprimir: ";
+	cin >> escolha;
+
+	for (int i = 0; i < tamanho; i++)
+	{
+		if (Produto[i].numero_identificador == escolha)
+		{
+			cout << "__________________________" << endl;
+			cout << "|     Tabela Protudo     |" << endl;
+			cout << "|ID |    NOME    | preco |" << endl;
+			cout << "| " << Produto[i].numero_identificador << " | " << Produto[i].nome << "   | " << Produto[i].preco << "   |" << endl;
+		}
+	}
+}
+
 int imprimir_pedido(struct PEDIDO *Pedido, int tamanho_pedido)
 {
 	Pedido_txt.open("Pedido.txt", ios::app);
 
-	for (int i = 0; i < tamanho_pedido; i++)
+	for (int i = 0; i <= tamanho_pedido; i++)
 	{
 		cout << "_______________________________" << endl;
-		cout << "|           tabela pedido     |" << endl;
+		cout << "|           Tabela Pedido     |" << endl;
 		cout << "|Numero do pedido |    cpf    |" << endl;
 		cout << "| " << Pedido[i].numero_pedido << "               |    " << *Pedido[i].CPF_cliente << "      | " << endl;
 
 		Pedido_txt << "_______________________________" << endl;
-		Pedido_txt << "|           tabela pedido     |" << endl;
+		Pedido_txt << "|           Tabela Pedido     |" << endl;
 		Pedido_txt << "|Numero do pedido |    cpf    |" << endl;
 		Pedido_txt << "| " << Pedido[i].numero_pedido << "               |    " << *Pedido[i].CPF_cliente << "      | " << endl;
 	}
 
 	Pedido_txt.close();
+}
+
+int imprimir_selecionaod_pedido(struct PEDIDO *Pedido, int tamanho_pedido)
+{
+	int escolha;
+	cout << "Digite o numero_pedido:\n";
+	cout << "Qual pedido quer imprimir: ";
+	cin >> escolha;
+
+	for (int i = 0; i < tamanho_pedido; i++)
+	{
+		if (Pedido[i].numero_pedido == escolha)
+		{
+			cout << "_______________________________" << endl;
+			cout << "|           Tabela Pedido     |" << endl;
+			cout << "|Numero do pedido |    cpf    |" << endl;
+			cout << "| " << Pedido[i].numero_pedido << "               |    " << *Pedido[i].CPF_cliente << "      | " << endl;
+		}
+	}
 }
 
 int imprimir_todo_tebela(struct CLIENTE *Cliente, struct PRODUTO *Produto, struct PEDIDO *Pedido, struct INTENS_POR_PEDIDO *Intens_por_pedido, int tamanho)
@@ -517,14 +575,13 @@ int alterar_cliente(struct CLIENTE *Cliente, int tamanho)
 	cout << "\bDigite o ID do cliente que quer alterar: " << endl;
 	cout << "MENU: ";
 	cin >> clienteID;
-
 	do
 	{
-
 		for (int i = 0; i <= tamanho; i++)
 		{
 			if (Cliente[i].id == clienteID)
 			{
+
 				cout << "\n1) Alterar nome do cliente" << endl;
 				cout << "2) Alterar cpf fo cliente" << endl;
 				cout << "0) para sair" << endl;
@@ -544,11 +601,11 @@ int alterar_cliente(struct CLIENTE *Cliente, int tamanho)
 
 					Cliente[i].cpf = Cliente[i].cpf;
 				}
+
+				return imprimir_cliente(Cliente, tamanho);
 			}
 		}
 	} while (op != 0);
-
-	return imprimir_cliente(Cliente, tamanho);
 }
 
 int alterar_produto(struct PRODUTO *Produto, int tamanho)
@@ -595,7 +652,6 @@ int alterar_produto(struct PRODUTO *Produto, int tamanho)
 int alterar_pedido(struct PEDIDO *Pedido, int tamanho)
 {
 	int pedidoID, op;
-	// int *cpf;
 
 	cout << "\nDigite o ID do pedido que quer alterar:";
 	cin >> pedidoID;
@@ -608,7 +664,6 @@ int alterar_pedido(struct PEDIDO *Pedido, int tamanho)
 			if (Pedido[i].numero_pedido == pedidoID)
 			{
 				cout << "1) Alterar o numero do pedido: " << endl;
-				// cout << "2) Alterar o cpf do pedido: " << endl;
 				cout << "0) para sair" << endl;
 				cout << "MENU: ";
 				cin >> op;
@@ -620,13 +675,6 @@ int alterar_pedido(struct PEDIDO *Pedido, int tamanho)
 
 					Pedido[i].numero_pedido = Pedido[i].numero_pedido;
 				}
-				/* if (op == 2)
-				{
-					cout << "Digite o cpf do pedido: ";
-					cin >> *cpf;
-
-					Pedido[i].CPF_cliente = cpf;
-				} */
 			}
 		}
 	} while (op != 0);
@@ -635,3 +683,51 @@ int alterar_pedido(struct PEDIDO *Pedido, int tamanho)
 }
 
 //____________________fUNÇÃO DELETAR__________________________
+
+int deletar_selecionado_cliente(struct CLIENTE *Cliente, int tamanho)
+{
+
+	CLIENTE *aux = NULL;
+
+	int clienteID, op;
+
+	cout << "Digite o ID do cleinte: ";
+	cin >> clienteID;
+
+	aux = Cliente;
+
+	for (int i = 0; i <= tamanho; i++)
+	{
+
+		if (Cliente[i].id == clienteID)
+		{
+
+			do
+			{
+
+				cout << "1) Deletar o nome do cliente\n";
+				cout << "2) Deletar o CPF do cliente\n";
+				cout << "0) para sair\n";
+				cout << "MENU:";
+				cin >> op;
+
+				if (op == 1)
+				{
+					if (aux->nome == Cliente[i].nome)
+					{
+						aux->nome = "";
+					}
+				}
+				if (op == 2)
+				{
+					if (aux->cpf == Cliente[i].cpf)
+					{
+						aux->cpf = "";
+					}
+				}
+			} while (op != 0);
+		}
+	}
+
+	return imprimir_cliente(Cliente, tamanho);
+}
