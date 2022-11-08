@@ -1,0 +1,12 @@
+________________________
+|     Tabela Cliente   |
+|ID |    NOME    | CPF |
+| 0 | fe   | 1   |
+________________________
+|     Tabela Cliente   |
+|ID |    NOME    | CPF |
+| 0 | fe   | 1   |
+________________________
+|     Tabela Cliente   |
+|ID |    NOME    | CPF |
+| 1 | re   | 2   |
