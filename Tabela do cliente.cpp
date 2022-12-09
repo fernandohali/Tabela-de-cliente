@@ -1,138 +1,82 @@
-
 #include <iostream>
-#include <locale.h>
-#include <conio.h>
-#include <fstream>
-#include <string.h>
+#include <locale.h> // configurada adequadamente vai garantir que caracteres como “ç” e acentuação sejam exibidos normalmente em nosso programa.
+#include <conio.h>	// é para desenhar tela, e é para dos/windows (as funções do conio são úteis para manipular caracteres na tela, especificar cor de carácter e de fundo.)
+#include <fstream>	// fluxo de arquivo
+#include <iomanip>	// O iomanip é uma biblioteca em C++ que nos ajuda a manipular a saída de qualquer programa C++
 
 using namespace std;
 
-//______________Função Inserir_______________________
+//______________Função CLIENTE_______________________
+int inserir_cliente(struct CLIENTE *Cliente, int); // OK
 
-int inserir_cliente(struct CLIENTE *Cliente, int); // ok
+int imprimir_cliente(struct CLIENTE *Cliente, int); // OK
 
-int produto_cliente(struct PRODUTO *Produto, int);
+int imprimir_selecionado_cliente(struct CLIENTE *Cliente, int); // OK
 
-int pedido_cliente(struct PEDIDO *Pedido, int);
+int deletar_selecionado_cliente(struct CLIENTE *Cliente, struct ENDERECO *Endereco, int, int); // OK
 
-// int Intens_cliente(struct INTENS_POR_PEDIDO *Intens_por_pedido, int);
+//______________Função Inserir ENDERECO_______________
+int inserir_endereco(struct ENDERECO *Endereco, struct CLIENTE *Cliente, int);
 
-//_______________Função Imprimir____________________
-int imprimir_cliente(struct CLIENTE *Cliente, int);
+int imprimir_endereco(struct ENDERECO *Endereco, int);
 
-int imprimir_selecionado_cliente(struct CLIENTE *Cliente, int tamanho);
+int imprimir_selecionado_endereco(struct ENDERECO *Endereco, struct CLIENTE *Cliente, int);
 
-int imprimir_produto(struct PRODUTO *Produto, int);
+int deletar_selecionado_endereco(struct ENDERECO *Endereco, int);
 
-int imprimir_selecionado_produto(struct PRODUTO *Produto, int);
-
-int imprimir_pedido(struct PEDIDO *Pedido, int);
-
-int imprimir_selecionaod_pedido(struct PEDIDO *Pedido, int);
-
-// int imprimir_itens(struct INTENS_POR_PEDIDO *Intens_por_pedido, int);
-
-int imprimir_todo_tebela(struct CLIENTE *Cliente, struct PRODUTO *Produto, struct PEDIDO *Pedido, struct INTENS_POR_PEDIDO *Intens_por_pedido, int);
-
-int imprimir_geral(struct CLIENTE *Cliente, struct PRODUTO *Produto, int);
-
-// ___________________________Alterar tabela_____________
-
-int alterar_cliente(struct CLIENTE *Cliente, int);
-
-int alterar_produto(struct PRODUTO *Produto, int);
-
-int alterar_pedido(struct PEDIDO *Pedido, int);
-
-//____________________Função Deletar_____________________
-
-int deletar_selecionado_cliente(struct CLIENTE *Cliente, int);
-
-//________________________________________________________
+int deletar_endereco_cliente(struct ENDERECO *Endereco, int, int);
 
 struct CLIENTE
 {
-	// ok
-	string nome; // ok
-	string cpf;	 // ok
 	int id;
+	string nome;
 
 } Cliente;
 
-struct PRODUTO
+struct ENDERECO
 {
-	int numero_identificador;
-	string nome;
-	float preco;
+	int id_endereco;
 
-} Produto;
+	int numero;
+	string logradouro; // ok
+	string bairro;	   // ok
+	string cidade;	   // ok
 
-struct PEDIDO
-{
-	int numero_pedido;
+	// CLIENTE info_cliente;
 
-	string *CPF_cliente = &Cliente.cpf; // ok
-
-} Pedido;
-
-struct INTENS_POR_PEDIDO
-{
-	int *numero_do_pedido_cliente = &Pedido.numero_pedido;
-
-	int *numero_do_produto_comprado = &Produto.numero_identificador;
-
-	int *tamanho;
-	// Precisa de um contador para a quaidade de procutos comprados.
-
-} Intens_por_pedido;
+} Endereco;
 
 //_____________ SALVAR TEXTO____________
-ofstream Cliente_txt;
-ofstream Produto_txt;
-ofstream Pedido_txt;
-ofstream Intens_por_pedido_txt;
-ofstream Tabela_geral_cleinte;
+fstream Cliente_txt;
+fstream Endereco_txt;
 
 int main()
 {
+
 	string opcao;
-
-	int op, i = 0;
-
-	int *ptr;
-	int tamanho = 0;
-
-	int tamanho_produto = 0, tamanho_produto_i = 0;
-
-	int tamanho_pedido = 0, tamanho_pedido_i = 0;
-
-	int tamanho_Intens_por_pedido = 0, tamanho_Intens_por_pedido_i = 0;
+	int op;
+	int tamanho = 0, i = 0;
+	int tamanho_endereco = 0, tamanho_endereco_i = 0;
 
 	CLIENTE Cliente[100];
-	PRODUTO Produto[100];
-	PEDIDO Pedido[100];
-	INTENS_POR_PEDIDO Intens_por_pedido[100];
+	ENDERECO Endereco[100];
 
 	do
 	{
-
 		cout << endl;
 		cout << "|-----------------------------------------------|" << endl;
 		cout << "|                TABELA CLIENTE                 |" << endl;
 		cout << "|_______________________________________________|" << endl;
 		cout << "|                                               |" << endl;
-		cout << "|A) MENU do cliente                             |" << endl;
-		cout << "|B) MENU dos produtos                           |" << endl;
-		cout << "|C) MENU do Pedido                              |" << endl;
-		cout << "|D) MENU Itens por pedido                       |" << endl;
-		cout << "|E) IMPRIMIR todas as informacoes               |" << endl;
-		cout << "|F) DELETA todas as informacoes                 |" << endl;
+		cout << "|A) MENU do cliente                             |" << endl; // OK
+		cout << "|B) MENU dos endereco                           |" << endl;
 		cout << "|S) Sair do menu                                |" << endl;
 		cout << "|MENU: ";
 		cin >> opcao;
 
-		if (opcao == "a")
+		if (opcao == "a" or opcao == "A")
 		{
+			// OK
 			cout << "\n|-----------------------------------------------|" << endl;
 			cout << "|                 CLIENTE                       |" << endl;
 			cout << "|_______________________________________________|" << endl;
@@ -141,91 +85,21 @@ int main()
 			cout << "|2) Imprimir o cliente selecionado              |" << endl; // OK
 			cout << "|3) Imprimir todos os clientes                  |" << endl; // OK
 			cout << "|4) Deletar o cliente selecionado               |" << endl; // OK
-			cout << "|5) Deletar todos os clientes                   |" << endl; // FAZER AINDA
-			cout << "|6) Alterar o cliente selecionado               |" << endl; // OK
-			cout << "|0) Para voltar ao MENU                         |" << endl; // OK
+			cout << "|0) Para voltar ao MENU                         |" << endl;
 			cout << "|MENU: ";
 			cin >> op;
 		}
-		if (opcao == "b")
+
+		if (opcao == "b" or opcao == "B")
 		{
 			cout << "\n|-----------------------------------------------|" << endl;
-			cout << "|                   PRODUTO                      |" << endl;
+			cout << "|                   ENDERECO                     |" << endl;
 			cout << "|________________________________________________|" << endl;
 			cout << "|                                                |" << endl;
-			cout << "|7) Inserir as informacoes do produto            |" << endl; // OK
-			cout << "|8) Imprimir o produtos selecionado              |" << endl; // OK
-			cout << "|9) Imprimir todos os produtos                   |" << endl; // OK
-			cout << "|10) Deletar o produtos selecionado              |" << endl; // FAZER AINDA
-			cout << "|11) Deletar todos os produtos                   |" << endl; // FAZER AINDA
-			cout << "|12) Alterar o pruduto selecionado               |" << endl; // OK
-			cout << "|0) Para voltar ao MENU                          |" << endl;
-			cout << "|MENU: ";
-			cin >> op;
-		}
-		if (opcao == "c")
-		{
-			cout << "\n|----------------------------------------------|" << endl;
-			cout << "|                   PEDIDO                      |" << endl;
-			cout << "|_______________________________________________|" << endl;
-			cout << "|                                               |" << endl;
-			cout << "|13) Criar o pedido do cliente                  |" << endl; // OK
-			cout << "|14) Imprimir o pedido selecionado              |" << endl; // OK
-			cout << "|15) Imprimir todos os pedidos                  |" << endl; // OK
-			cout << "|16) Deletar o pedido selecioando               |" << endl; // FAZER AINDA
-			cout << "|17) Deletar todos os pedidos                   |" << endl; // FAZER AINDA
-			cout << "|18) Alterar o pedido selecionado               |" << endl; // OK
-			cout << "|0) Voltar ao MENU                              |" << endl;
-			cout << "|MENU: ";
-			cin >> op;
-		}
-		if (opcao == "d")
-		{
-			cout << "\n|-----------------------------------------------|" << endl;
-			cout << "|              INTENS POR PEDIDO                 |" << endl;
-			cout << "|________________________________________________|" << endl;
-			cout << "|                                                |" << endl;
-			cout << "|19) Inserir intens por cliente                  |" << endl; // FAZER AINDA
-			cout << "|20) Imprimir os intens selecionado              |" << endl; // FAZER AINDA
-			cout << "|21) Imprimir todos os intens por pedido         |" << endl; // FAZER AINDA
-			cout << "|22) Deletar os intens selecionado               |" << endl; // FAZER AINDA
-			cout << "|23) Deletar todos os intens                     |" << endl; // FAZER AINDA
-			cout << "|24) Alterar os intens selecionado               |" << endl; // FAZER AINDA
-			cout << "|0) Voltar ao MENU                               |" << endl;
-			cout << "|MENU: ";
-			cin >> op;
-		}
-		if (opcao == "e")
-		{
-			cout << "\n|-----------------------------------------------|" << endl;
-			cout << "|                   IMPRIMIR                     |" << endl;
-			cout << "|________________________________________________|" << endl;
-			cout << "|                                                |" << endl;
-			cout << "|25) Imprimir todas as informacoes               |" << endl;
-			cout << "|26) Imrprimir toda tebela do cliente selecioado |" << endl;
-			cout << "|0) Para voltar ao MENU                          |" << endl;
-			cout << "|MENU: ";
-			cin >> op;
-		}
-		if (opcao == "f")
-		{
-			cout << "\n|-----------------------------------------------|" << endl;
-			cout << "|                   DELETAR                      |" << endl;
-			cout << "|________________________________________________|" << endl;
-			cout << "|                                                |" << endl;
-			cout << "|27) Deletar todas as informacoes                |" << endl;
-			cout << "|28) Deletar toda tebela do cliente selecioado   |" << endl;
-			cout << "|0) Para voltar ao MENU                          |" << endl;
-			cout << "|MENU: ";
-			cin >> op;
-		}
-		if (opcao == "h")
-		{
-			cout << "\n|-----------------------------------------------|" << endl;
-			cout << "|                      VAZIO                     |" << endl;
-			cout << "|________________________________________________|" << endl;
-			cout << "|                                                |" << endl;
-			cout << "|29) Alterar todas as informacoes do cliente     |" << endl;
+			cout << "|5) Inserir as informacoes do endereco           |" << endl; // OK
+			cout << "|6) Imprimir o endereco selecionado              |" << endl; // OK
+			cout << "|7) Imprimir todos os endereco                   |" << endl; // OK
+			cout << "|8) Deletar o endereco selecionado               |" << endl; // AINDA FAZER
 			cout << "|0) Para voltar ao MENU                          |" << endl;
 			cout << "|MENU: ";
 			cin >> op;
@@ -236,30 +110,14 @@ int main()
 			tamanho = i;
 			i++;
 		}
-
-		if (op == 2)
+		if (op == 5)
 		{
-			tamanho_produto = tamanho_produto_i;
-			tamanho_produto_i++;
-		}
-		if (op == 13)
-		{
-			tamanho_pedido = tamanho_pedido_i;
-			tamanho_pedido_i++;
-		}
-		if (op == 4)
-		{
-			tamanho_Intens_por_pedido = tamanho_Intens_por_pedido_i;
-			tamanho_Intens_por_pedido_i++;
+			tamanho_endereco = tamanho_endereco_i;
+			tamanho_endereco_i++;
 		}
 
 		switch (op)
 		{
-
-			//  "|-----------------------------------------------|" << endl;
-			//  "|                 CLIENTE                       |" << endl;
-			//  "|_______________________________________________|" << endl;
-
 		case 1:
 		{
 
@@ -269,465 +127,327 @@ int main()
 
 		case 2:
 		{
-			imprimir_selecionado_cliente(Cliente, tamanho);
+			imprimir_selecionado_cliente(Cliente, tamanho); // OK
 		}
 		break;
 
 		case 3:
 		{
-			imprimir_cliente(Cliente, tamanho);
+			imprimir_cliente(Cliente, tamanho); // OK
 		}
 		break;
 
 		case 4:
 		{
-			deletar_selecionado_cliente(Cliente, tamanho);
+			deletar_selecionado_cliente(Cliente, Endereco, tamanho, tamanho_endereco);
+			tamanho--;
 		}
 		break;
 
+			//        << "  |------------------------------------------------|" << endl;
+			//          << "|                   ENDERECO                     |" << endl;
+			//           <<"|________________________________________________|" << endl;
+
 		case 5:
 		{
-
-			// deletar_todos_cliente(Cleinte, tamanho);
-			// deletar_todos_cliente(struct CLIENTE Cliente, int tamanho);
+			inserir_endereco(Endereco, Cliente, tamanho_endereco);
 		}
 		break;
 
 		case 6:
 		{
-			alterar_cliente(Cliente, tamanho);
+			imprimir_selecionado_endereco(Endereco, Cliente, tamanho_endereco);
 		}
+
 		break;
-
-			//----------------------------------------------------------------
-
-			//  "|------------------------------------------------|" << endl;
-			//  "|                   PRODUTO                      |" << endl;
-			//  "|________________________________________________|" << endl;
 
 		case 7:
 		{
-			produto_cliente(Produto, tamanho_produto);
+			imprimir_endereco(Endereco, tamanho_endereco);
 		}
 		break;
 
 		case 8:
 		{
-			imprimir_selecionado_produto(Produto, tamanho_produto);
+			deletar_selecionado_endereco(Endereco, tamanho_endereco);
+			tamanho_endereco--;
 		}
-		break;
-
-		case 12:
-		{
-			alterar_produto(Produto, tamanho_produto);
-		}
-		break;
-
-			//----------------------------------------------------------------
-
-			//  "|-----------------------------------------------|" << endl;
-			//  "|                   PEDIDO                      |" << endl;
-			//  "|_______________________________________________|" << endl;
-
-		case 13:
-		{
-			pedido_cliente(Pedido, tamanho_pedido);
-		}
-		break;
-
-		case 14:
-		{
-			imprimir_selecionaod_pedido(Pedido, tamanho_pedido);
-		}
-		break;
-
-		case 15:
-		{
-			imprimir_pedido(Pedido, tamanho_pedido);
-		}
-		break;
-
-		case 25:
-		{
-
-			imprimir_todo_tebela(Cliente, Produto, Pedido, Intens_por_pedido, tamanho);
-		}
-
 		break;
 
 		default:
 			break;
 		}
-
 	} while (opcao != "s");
 
 	return 0;
 }
 
-// ok
+//________________CLIENTE_________________________
+
 int inserir_cliente(struct CLIENTE *Cliente, int tamanho)
 {
+	// ENDERECO Endereco[100];
 
-	PEDIDO Pedido[100];
+	for (int i = tamanho; i <= tamanho; i++)
+	{
+		cout << "\nDigite o nome do cliente: ";
+		cin >> Cliente[i].nome;
+	}
 
 	for (int i = tamanho; i <= tamanho; i++)
 	{
 
-		cout << "\nDigite o nome do cliente: ";
-		cin >> Cliente[i].nome;
-
-		cout << "Digite o CPf do cliente: ";
-		cin >> Cliente[i].cpf;
-
 		Cliente[i].id = i;
-
-		*Pedido[i].CPF_cliente = Cliente[i].cpf;
 	}
 
 	return imprimir_cliente(Cliente, tamanho);
 }
 
-int produto_cliente(struct PRODUTO *Produto, int tamanho)
-{
-
-	cout << endl;
-	for (int i = tamanho; i <= tamanho; i++)
-	{
-		cout << "Digete o nome do produto: ";
-		cin >> Produto[i].nome;
-
-		cout << "Preco do prutodo: ";
-		cin >> Produto[i].preco;
-
-		Produto[i].numero_identificador = i;
-	}
-
-	return imprimir_produto(Produto, tamanho);
-}
-
-int pedido_cliente(struct PEDIDO *Pedido, int tamanho_pedido)
-{
-	cout << "\n";
-
-	for (int i = 0; i <= tamanho_pedido; i++)
-	{
-
-		Pedido[i].numero_pedido = i;
-		// tamanho_pedido = i;
-	}
-
-	return imprimir_pedido(Pedido, tamanho_pedido);
-}
-
-//____________________fUNÇÃO IMPRIMIR__________________________
-
 int imprimir_cliente(struct CLIENTE *Cliente, int tamanho)
 {
-	Cliente_txt.open("Cliente.txt", ios::app); // não subistiuir o valor anterio. (ios::app)
-
+	Cliente_txt.open("Cliente.txt", ios::app | ios::out);
 	cout << "\n";
+
 	for (int i = 0; i <= tamanho; i++)
 	{
 		cout << "________________________" << endl;
-		cout << "|     Tabela Cliente   |" << endl;
-		cout << "|ID |    NOME    | CPF |" << endl;
-		cout << "| " << Cliente[i].id << " | " << Cliente[i].nome << "   | " << Cliente[i].cpf << "   |" << endl;
+		cout << "|     Tabela Cliente    |" << endl;
+		cout << "| ID | NOME             |" << endl;
+		cout << "| " << Cliente[i].id << "  |    " << Cliente[i].nome << "  " << endl;
+	}
+	for (int i = tamanho; i <= tamanho; i++)
+	{
 
 		Cliente_txt << "________________________" << endl;
-		Cliente_txt << "|     Tabela Cliente   |" << endl;
-		Cliente_txt << "|ID |    NOME    | CPF |" << endl;
-		Cliente_txt << "| " << Cliente[i].id << " | " << Cliente[i].nome << "   | " << Cliente[i].cpf << "   |" << endl;
+		Cliente_txt << "|     Tabela Cliente    |" << endl;
+		Cliente_txt << "| ID | NOME             |" << endl;
+		Cliente_txt << "| " << Cliente[i].id << "  |    " << Cliente[i].nome << "  " << endl;
 	}
-
 	Cliente_txt.close();
 }
 
 int imprimir_selecionado_cliente(struct CLIENTE *Cliente, int tamanho)
 {
-	int escolha;
-	cout << "Digite o ID do cleinte\n";
-	cout << "Qual cliente quer imprimir: ";
-	cin >> escolha;
+	int cliente_id;
+
+	cout << "\nQual cliente voce que imprimir:\n";
+	cout << "Digite o id do cliente: ";
+	cin >> cliente_id;
 
 	for (int i = 0; i <= tamanho; i++)
 	{
-		if (escolha = Cliente[i].id)
+		if (cliente_id == Cliente[i].id)
 		{
 			cout << "________________________" << endl;
-			cout << "|     Tabela Cliente   |" << endl;
-			cout << "|ID |    NOME    | CPF |" << endl;
-			cout << "| " << Cliente[i].id << " | " << Cliente[i].nome << "   | " << Cliente[i].cpf << "   |" << endl;
+			cout << "|     Tabela Cliente    |" << endl;
+			cout << "| ID | NOME             |" << endl;
+			cout << "| " << Cliente[i].id << "  |    " << Cliente[i].nome << "  " << endl;
 		}
 	}
 }
 
-int imprimir_produto(struct PRODUTO *Produto, int tamanho)
+int deletar_selecionado_cliente(struct CLIENTE *Cliente, struct ENDERECO *Endereco, int tamanho, int tamanho_endereco)
 {
-	Produto_txt.open("Produto.txt", ios::app);
+	int cliente_id;
+
+	cout << "\nQual cliente voce que deletar:\n";
+	cout << "Digite o id do cliente: ";
+	cin >> cliente_id;
 
 	for (int i = 0; i <= tamanho; i++)
 	{
 
-		cout << "__________________________" << endl;
-		cout << "|     Tabela Protudo     |" << endl;
-		cout << "|ID |    NOME    | preco |" << endl;
-		cout << "| " << Produto[i].numero_identificador << " | " << Produto[i].nome << "   | " << Produto[i].preco << "   |" << endl;
+		if (cliente_id == Cliente[i].id)
+		{
 
-		Produto_txt << "__________________________" << endl;
-		Produto_txt << "|     Tabela Protudo     |" << endl;
-		Produto_txt << "|ID |    NOME    | preco |" << endl;
-		Produto_txt << "| " << Produto[i].numero_identificador << " | " << Produto[i].nome << "   | " << Produto[i].preco << "   |" << endl;
+			for (int j = i; j < tamanho - 1; j++)
+			{
+
+				Cliente[j].id = Cliente[j + 1].id;
+				Cliente[j].nome[i] = Cliente[j + 1].nome[i];
+			}
+
+			cout << "\nfuncao remover: " << endl;
+			cout << "________________________" << endl;
+			cout << "|     Tabela Cliente    |" << endl;
+			cout << "| ID | NOME             |" << endl;
+			cout << "| " << Cliente[i].id << "  |    " << Cliente[i].nome << "  " << endl;
+
+			if (cliente_id == Endereco[cliente_id].id_endereco)
+			{
+				deletar_endereco_cliente(Endereco, cliente_id, tamanho_endereco);
+				tamanho_endereco--;
+			}
+			else
+			{
+				cout << "\nEsse usuario nao tem endereco:\n";
+			}
+		}
 	}
-
-	Produto_txt.close();
 }
 
-int imprimir_selecionado_produto(struct PRODUTO *Produto, int tamanho)
+//        << "  |------------------------------------------------|" << endl;
+//          << "|                   ENDERECO                     |" << endl;
+//           <<"|________________________________________________|" << endl;
+
+int inserir_endereco(struct ENDERECO *Endereco, struct CLIENTE *Cliente, int tamanho)
 {
 
-	int escolha;
-	cout << "Digite o ID do produto:\n";
-	cout << "Qual produto quer imprimir: ";
-	cin >> escolha;
+	int cliente_id;
+
+	cout << "\nDigite as informacoes do endereco!\n";
+	cout << "Digite o ID do cliente para colocar o endereco: ";
+	cin >> cliente_id;
+
+	if (cliente_id == Cliente[cliente_id].id)
+	{
+		for (int i = tamanho; i <= tamanho; i++)
+		{
+
+			cout << "\n1 - I: " << i << endl;
+
+			cout << "\nDigite a cidade: ";
+			cin >> Endereco[i].cidade;
+
+			cout << "Digite o bairro: ";
+			cin >> Endereco[i].bairro;
+
+			cout << "Digite logradouro: ";
+			cin >> Endereco[i].logradouro;
+
+			cout << "Digite o numero: ";
+			cin >> Endereco[i].numero;
+
+			Endereco[i].id_endereco = Cliente[cliente_id].id; // ok
+		}
+		imprimir_endereco(Endereco, tamanho);
+	}
+}
+
+int imprimir_endereco(struct ENDERECO *Endereco, int tamanho)
+{
+
+	Endereco_txt.open("Endereco.txt", ios::app | ios::out);
+
+	for (int i = tamanho; i <= tamanho; i++)
+	{
+
+		Endereco_txt << "\n________________________" << endl;
+		Endereco_txt << "|     Tabela endereco   |" << endl;
+		Endereco_txt << "| ID :" << Endereco[i].id_endereco << endl;
+		Endereco_txt << "| CIDADE: " << Endereco[i].cidade << endl;
+		Endereco_txt << "| BAIRRIO: " << Endereco[i].bairro << endl;
+		Endereco_txt << "| LOGRADOURO: " << Endereco[i].logradouro << endl;
+		Endereco_txt << "| NUMERO: " << Endereco[i].numero << endl;
+	}
+	Endereco_txt.close();
+
+	for (int i = 0; i <= tamanho; i++)
+	{
+
+		cout << "\n________________________" << endl;
+		cout << "|     Tabela endereco   |" << endl;
+		cout << "| ID :" << Endereco[i].id_endereco << endl;
+		cout << "| CIDADE: " << Endereco[i].cidade << endl;
+		cout << "| BAIRRIO: " << Endereco[i].bairro << endl;
+		cout << "| LOGRADOURO: " << Endereco[i].logradouro << endl;
+		cout << "| NUMERO: " << Endereco[i].numero << endl;
+	}
+
+	/* Endereco_txt.open("Endereco.txt", ios::in);
+
+if (Endereco_txt.is_open())
+{
+	while (getline(Endereco_txt, linha))
+	{
+		cout << linha << endl;
+	}
+	Endereco_txt.close();
+}
+else
+{
+	cout << "Nao foi possivel abrir o arquivo" << endl;
+} */
+}
+
+int imprimir_selecionado_endereco(struct ENDERECO *Endereco, struct CLIENTE *Cliente, int tamanho)
+{
+
+	int endereco_id;
+	cout << "\nQual endereco voce que imprimir:\n";
+	cout << "Digite o id do endereco: ";
+	cin >> endereco_id;
+
+	for (int i = 0; i <= tamanho; i++)
+	{
+		if (endereco_id == Cliente[i].id)
+		{
+
+			cout << "\n________________________" << endl;
+			cout << "|     Tabela endereco   |" << endl;
+			cout << "| ID :" << Endereco[i].id_endereco << endl;
+			cout << "| CIDADE: " << Endereco[i].cidade << endl;
+			cout << "| BAIRRIO: " << Endereco[i].bairro << endl;
+			cout << "| LOGRADOURO: " << Endereco[i].logradouro << endl;
+			cout << "| NUMERO: " << Endereco[i].numero << endl;
+		}
+	}
+}
+
+int deletar_selecionado_endereco(struct ENDERECO *Endereco, int tamanho)
+{
+	int endereco_id;
+
+	cout << "\nQual endereco voce que deletar:\n";
+	cout << "Digite o id do endereco: ";
+	cin >> endereco_id;
 
 	for (int i = 0; i < tamanho; i++)
 	{
-		if (Produto[i].numero_identificador == escolha)
+		if (endereco_id == Endereco[i].id_endereco)
 		{
-			cout << "__________________________" << endl;
-			cout << "|     Tabela Protudo     |" << endl;
-			cout << "|ID |    NOME    | preco |" << endl;
-			cout << "| " << Produto[i].numero_identificador << " | " << Produto[i].nome << "   | " << Produto[i].preco << "   |" << endl;
-		}
-	}
-}
-
-int imprimir_pedido(struct PEDIDO *Pedido, int tamanho_pedido)
-{
-	Pedido_txt.open("Pedido.txt", ios::app);
-
-	for (int i = 0; i <= tamanho_pedido; i++)
-	{
-		cout << "_______________________________" << endl;
-		cout << "|           Tabela Pedido     |" << endl;
-		cout << "|Numero do pedido |    cpf    |" << endl;
-		cout << "| " << Pedido[i].numero_pedido << "               |    " << *Pedido[i].CPF_cliente << "      | " << endl;
-
-		Pedido_txt << "_______________________________" << endl;
-		Pedido_txt << "|           Tabela Pedido     |" << endl;
-		Pedido_txt << "|Numero do pedido |    cpf    |" << endl;
-		Pedido_txt << "| " << Pedido[i].numero_pedido << "               |    " << *Pedido[i].CPF_cliente << "      | " << endl;
-	}
-
-	Pedido_txt.close();
-}
-
-int imprimir_selecionaod_pedido(struct PEDIDO *Pedido, int tamanho_pedido)
-{
-	int escolha;
-	cout << "Digite o numero_pedido:\n";
-	cout << "Qual pedido quer imprimir: ";
-	cin >> escolha;
-
-	for (int i = 0; i < tamanho_pedido; i++)
-	{
-		if (Pedido[i].numero_pedido == escolha)
-		{
-			cout << "_______________________________" << endl;
-			cout << "|           Tabela Pedido     |" << endl;
-			cout << "|Numero do pedido |    cpf    |" << endl;
-			cout << "| " << Pedido[i].numero_pedido << "               |    " << *Pedido[i].CPF_cliente << "      | " << endl;
-		}
-	}
-}
-
-int imprimir_todo_tebela(struct CLIENTE *Cliente, struct PRODUTO *Produto, struct PEDIDO *Pedido, struct INTENS_POR_PEDIDO *Intens_por_pedido, int tamanho)
-{
-	Tabela_geral_cleinte.open("Tabela_geral_cleinte.txt", ios::app);
-
-	int escolher;
-
-	cout << "\nDigite o ID do cliente\n";
-	cout << "Qual cliente voce quer imprimir: ";
-	cin >> escolher;
-
-	for (int i = escolher; i <= tamanho; i++)
-	{
-
-		cout << "_____________________________________________________________________________" << endl;
-		cout << "|     tabela cliente   |     tabela protudo     |        tabela pedido      |" << endl;
-		cout << "|ID |    NOME    | CPF |ID |    NOME    | preco |Numero do pedido |    cpf  |" << endl;
-		cout << "| " << Cliente[i].id << " | " << Cliente[i].nome << "   | " << Cliente[i].cpf
-			 << "  | " << Produto[i].numero_identificador << " | " << Produto[i].nome << "       | " << Produto[i].preco
-			 << "   | " << Pedido[i].numero_pedido << "               |    " << *Pedido[i].CPF_cliente << "      | " << endl;
-	}
-
-	Tabela_geral_cleinte.close();
-}
-
-//____________________fUNÇÃO ALTERAR__________________________
-
-int alterar_cliente(struct CLIENTE *Cliente, int tamanho)
-{
-
-	int clienteID, op;
-
-	cout << "\bDigite o ID do cliente que quer alterar: " << endl;
-	cout << "MENU: ";
-	cin >> clienteID;
-	do
-	{
-		for (int i = 0; i <= tamanho; i++)
-		{
-			if (Cliente[i].id == clienteID)
+			for (int j = i; j <= tamanho - 1; j++)
 			{
-
-				cout << "\n1) Alterar nome do cliente" << endl;
-				cout << "2) Alterar cpf fo cliente" << endl;
-				cout << "0) para sair" << endl;
-				cout << "MENU: ";
-				cin >> op;
-
-				if (op == 1)
-				{
-					cout << "Digite o novo nome do cliente: ";
-					cin >> Cliente[i].nome;
-					Cliente[i].nome = Cliente[i].nome;
-				}
-				if (op == 2)
-				{
-					cout << "Digite o novo cpf fo cliente: ";
-					cin >> Cliente[i].cpf;
-
-					Cliente[i].cpf = Cliente[i].cpf;
-				}
-
-				return imprimir_cliente(Cliente, tamanho);
+				Endereco[i].id_endereco = Endereco[i].id_endereco;
+				Endereco[i].cidade[i] = Endereco[i].cidade[i];
+				Endereco[i].bairro[i] = Endereco[i].bairro[i];
+				Endereco[i].logradouro[i] = Endereco[i].logradouro[i];
+				Endereco[i].numero = Endereco[i].numero;
 			}
+			cout << "\n________________________" << endl;
+			cout << "|     Tabela endereco   |" << endl;
+			cout << "| ID :" << Endereco[i].id_endereco << endl;
+			cout << "| CIDADE: " << Endereco[i].cidade << endl;
+			cout << "| BAIRRIO: " << Endereco[i].bairro << endl;
+			cout << "| LOGRADOURO: " << Endereco[i].logradouro << endl;
+			cout << "| NUMERO: " << Endereco[i].numero << endl;
 		}
-	} while (op != 0);
+	}
 }
 
-int alterar_produto(struct PRODUTO *Produto, int tamanho)
+int deletar_endereco_cliente(struct ENDERECO *Endereco, int cliente_id, int tamanho)
 {
-	int produtoID, op;
-
-	cout << "\nDigite o ID do produto que quer alterar:";
-	cin >> produtoID;
-
-	do
-	{
-
-		for (int i = 0; i <= tamanho; i++)
-		{
-			if (Produto[i].numero_identificador == produtoID)
-			{
-				cout << "1) Alterar o nome do produto: " << endl;
-				cout << "2) Alterar o preco do produto: " << endl;
-				cout << "0) para sair" << endl;
-				cout << "MENU: ";
-				cin >> op;
-
-				if (op == 1)
-				{
-					cout << "Digite o novo nome do produto: ";
-					cin >> Produto[i].nome;
-
-					Produto[i].nome = Produto[i].nome;
-				}
-				if (op == 2)
-				{
-					cout << "Digite o novo preco do produto: ";
-					cin >> Produto[i].preco;
-
-					Produto[i].preco = Produto[i].preco;
-				}
-			}
-		}
-	} while (op != 0);
-
-	return imprimir_produto(Produto, tamanho);
-}
-
-int alterar_pedido(struct PEDIDO *Pedido, int tamanho)
-{
-	int pedidoID, op;
-
-	cout << "\nDigite o ID do pedido que quer alterar:";
-	cin >> pedidoID;
-
-	do
-	{
-
-		for (int i = 0; i <= tamanho; i++)
-		{
-			if (Pedido[i].numero_pedido == pedidoID)
-			{
-				cout << "1) Alterar o numero do pedido: " << endl;
-				cout << "0) para sair" << endl;
-				cout << "MENU: ";
-				cin >> op;
-
-				if (op == 1)
-				{
-					cout << "Digite o numero do pedido: ";
-					cin >> Pedido[i].numero_pedido;
-
-					Pedido[i].numero_pedido = Pedido[i].numero_pedido;
-				}
-			}
-		}
-	} while (op != 0);
-
-	return imprimir_pedido(Pedido, tamanho);
-}
-
-//____________________fUNÇÃO DELETAR__________________________
-
-int deletar_selecionado_cliente(struct CLIENTE *Cliente, int tamanho)
-{
-
-	CLIENTE *aux = NULL;
-
-	int clienteID, op;
-
-	cout << "Digite o ID do cleinte: ";
-	cin >> clienteID;
-
-	aux = Cliente;
-
 	for (int i = 0; i <= tamanho; i++)
 	{
 
-		if (Cliente[i].id == clienteID)
+		if (cliente_id == Endereco[i].id_endereco)
 		{
-
-			do
+			for (int j = i; j <= tamanho - 1; j++)
 			{
-
-				cout << "1) Deletar o nome do cliente\n";
-				cout << "2) Deletar o CPF do cliente\n";
-				cout << "0) para sair\n";
-				cout << "MENU:";
-				cin >> op;
-
-				if (op == 1)
-				{
-					if (aux->nome == Cliente[i].nome)
-					{
-						aux->nome = "";
-					}
-				}
-				if (op == 2)
-				{
-					if (aux->cpf == Cliente[i].cpf)
-					{
-						aux->cpf = "";
-					}
-				}
-			} while (op != 0);
+				Endereco[i].id_endereco = Endereco[i].id_endereco;
+				Endereco[i].cidade[i] = Endereco[i].cidade[i];
+				Endereco[i].bairro[i] = Endereco[i].bairro[i];
+				Endereco[i].logradouro[i] = Endereco[i].logradouro[i];
+				Endereco[i].numero = Endereco[i].numero;
+			}
+			/* cout << "\n________________________" << endl;
+			cout << "|     Tabela endereco   |" << endl;
+			cout << "| ID :" << Endereco[i].id_endereco << endl;
+			cout << "| CIDADE: " << Endereco[i].cidade[i] << endl;
+			cout << "| BAIRRIO: " << Endereco[i].bairro[i] << endl;
+			cout << "| LOGRADOURO: " << Endereco[i].logradouro[i] << endl;
+			cout << "| NUMERO: " << Endereco[i].numero << endl; */
+			imprimir_endereco(Endereco, tamanho);
 		}
 	}
-
-	return imprimir_cliente(Cliente, tamanho);
 }
